@@ -6,6 +6,19 @@ import play.api.libs.json._
 import scala.sys.process._
 import scala.util.{ Success, Properties, Try}
 
+import play.api.libs.functional.syntax._
+
+case class WarnResult(warningCode: Int, message: String, file: String, line: Int)
+
+object  WarnResult {
+  implicit val warnReads = (
+    (__ \ "warning_code").read[Int] and
+      (__ \ "message").read[String] and
+      (__ \ "file").read[String] and
+      (__ \ "line").read[Int]
+    )(WarnResult.apply _)
+}
+
 object Brakeman extends Tool {
 
 
@@ -20,6 +33,28 @@ object Brakeman extends Tool {
     val results = parseToolResult(resultFromTool)
 
     Try(results)
+  }
+
+  def warningToPatternId(warningCode: Int): String = {
+    warningCode match {
+      case 0 => "SQL"
+
+      case _ => "Unknow Error"
+    }
+  }
+
+  def warningToResult(warn: JsValue): Option[Result] = {
+
+    warn.asOpt[WarnResult].map{
+      res =>
+        val source = SourcePath(res.file)
+        val resultMessage = ResultMessage(res.message)
+        val patternId = PatternId(warningToPatternId(res.warningCode))
+        val line = ResultLine(res.line)
+
+        Result(source, resultMessage, patternId, line)
+    }
+
   }
 
   def parseToolResult(resultFromTool: Stream[String]): Iterable[Result] = {
@@ -42,12 +77,7 @@ object Brakeman extends Tool {
 
     val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
 
-    println("\n\n\nJSON Result Warning\n\n\n" + warnings.mkString("\n") + "\n\n\nEndResults\n\n\n")
-
-    //Dummy Results
-    val dummyRes = Result(SourcePath("XPTO.file"), ResultMessage("XPTO.message"), PatternId("XPTO.id"), ResultLine(42))
-    val dummyRes2 = Result(SourcePath("XPTO2.file"), ResultMessage("XPTO2.message"), PatternId("XPTO2.id"), ResultLine(24))
-    Seq(dummyRes, dummyRes2)
+    warnings.flatMap(warningToResult)
   }
 
 
