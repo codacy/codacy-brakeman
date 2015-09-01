@@ -28,17 +28,24 @@ object Brakeman extends Tool {
 
     val command = getCommandFor(path, conf, files)
 
+    println("\n\nCMD:\n\n")
+
+    println(s"\n\n$command\n\n")
+
+
+    println("\n\nCMD:\n\n")
+
     val resultFromTool = command.lineStream(ProcessLogger(_ => ()))
 
     val results = parseToolResult(resultFromTool)
 
-    Try(results)
+    Try(results.filter(isEnabled))
   }
 
   def warningToPatternId(warningCode: Int): String = {
     warningCode match {
       case 0 => "SQL"
-
+      case 18 => "Redirect"
       case _ => "Unknow Error"
     }
   }
@@ -80,28 +87,16 @@ object Brakeman extends Tool {
     warnings.flatMap(warningToResult)
   }
 
-
-  private[this] implicit lazy val writer = Json.reads[Result]
-
-  private[this] def parseLine(line: String) = Try(Json.parse(line)).toOption.flatMap(_.asOpt[Result])
-
-  //Probably will use, remember that tool results come without the /src
-  private[this] def toRelativePath(rootDirectory: Path, path: String): Option[SourcePath] = {
-    val absolutePath = Paths.get(path)
-    Try(rootDirectory.relativize(absolutePath)).map { case relativePaths => SourcePath(relativePaths.toString) }.toOption
-  }
-
-
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
 
     val filesToTest = files.filter(paths => paths.nonEmpty).fold(Seq[String]()) {
-      paths => Seq("--only-files") ++ paths.map(p => p.toString)
+      paths => Seq("--only-files", paths.mkString(","))
     }
 
     val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold(Seq[String]()) {
       patterns =>
         val patternsIds = patterns.map(p => p.patternId.toString)
-        Seq("-t") ++ patternsIds
+        Seq("-t", patternsIds.mkString(","))
     }
 
     Seq("brakeman", path.toString) ++ filesToTest ++ Seq( "-f", "json") ++ patternsToTest
