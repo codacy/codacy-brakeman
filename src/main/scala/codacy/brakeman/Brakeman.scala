@@ -45,17 +45,17 @@ object Brakeman extends Tool {
 
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
 
-    val filesToTest = files.filter(paths => paths.nonEmpty).fold("") {
-      paths => s"--only-files ${paths.mkString(",")}"
+    val filesToTest = files.filter(paths => paths.nonEmpty).fold(Seq[String]()) {
+      paths => Seq("--only-files") ++ paths.map(p => p.toString)
     }
 
-    val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold("") {
+    val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold(Seq[String]()) {
       patterns =>
-        val patternsIds = patterns.map(p => p.patternId).mkString(",")
-        s"-t $patternsIds"
+        val patternsIds = patterns.map(p => p.patternId.toString)
+        Seq("-t") ++ patternsIds
     }
 
-    Seq("brakeman", path.toString, filesToTest, "-f", "json", patternsToTest)
+    Seq("brakeman", path.toString) ++ filesToTest ++ Seq( "-f", "json") ++ patternsToTest
   }
 }
 
