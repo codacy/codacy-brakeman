@@ -23,7 +23,26 @@ object Brakeman extends Tool {
   }
 
   def parseToolResult(resultFromTool: Stream[String]): Iterable[Result] = {
+
+    lazy val ErrorPattern = """(.+):\s*([0-9]+)\s*::(.+)""".r
+
     val jsonResult = Json.parse(resultFromTool.mkString)
+
+    val errors = (jsonResult \ "errors").asOpt[JsArray]
+      .fold(Seq[JsValue]())(arr => arr.value)
+      .map(err => err \ "error")
+      .map(err => err.asOpt[String]
+      .getOrElse(""))
+
+    errors.foreach{
+      case ErrorPattern(filename, line, msg) =>
+        println(s"TODO: Error at $filename;\n  line $line;\n  msg = $msg")
+      case err => println(s"TODO: Generic error => $err")
+    }
+
+    val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
+
+    println("\n\n\nJSON Result Warning\n\n\n" + warnings.mkString("\n") + "\n\n\nEndResults\n\n\n")
 
     //Dummy Results
     val dummyRes = Result(SourcePath("XPTO.file"), ResultMessage("XPTO.message"), PatternId("XPTO.id"), ResultLine(42))
