@@ -1,4 +1,300 @@
 {
   "name": "brakeman",
-  "patterns": []
+  "patterns": [
+    {
+      "patternId": "SymbolDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "JSONEncoding",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "MailTo",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "TranslateBug",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SSLVerify",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Execute",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "WithoutProtection",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Render",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "FileDisclosure",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Send",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "LinkToHref",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "JSONParsing",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "HeaderDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SelectVulnerability",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SafeBufferManipulation",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "UnsafeReflection",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ModelAttributes",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "CrossSiteScripting",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ModelAttrAccessible",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ValidationRegex",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SQL",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "NestedAttributes",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ModelSerialize",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "YAMLParsing",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Evaluation",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SessionSettings",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "RegexDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "StripTags",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "CreateWith",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "LinkTo",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "JRubyXML",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "DefaultRoutes",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SkipBeforeFilter",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SimpleFormat",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ForgerySetting",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "DigestDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "FileAccess",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "RenderDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "BasicAuth",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "UnscopedFind",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "FilterSkipping",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "XMLDoS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SQLCVEs",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Redirect",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SelectTag",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "EscapeFunction",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "Deserialize",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SingleQuotes",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ResponseSplitting",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "QuoteTableName",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SendFile",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "ContentTag",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "I18nXSS",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "NumberToCurrency",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SanitizeMethods",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "RenderInline",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "SymbolDoSCVE",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "DetailedExceptions",
+      "level": "Warning",
+      "category": "Security"
+    },
+    {
+      "patternId": "MassAssignment",
+      "level": "Warning",
+      "category": "Security"
+    }
+  ]
 }

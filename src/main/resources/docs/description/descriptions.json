@@ -1,2 +1,356 @@
 [
+  {
+    "patternId": "SymbolDoS",
+    "title": "Checks for symbol denial of service",
+    "description": "Checks for symbol denial of service",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "JSONEncoding",
+    "title": "Checks for missing JSON encoding (CVE-2015-3226)",
+    "description": "Checks for missing JSON encoding (CVE-2015-3226)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "MailTo",
+    "title": "Checks for mail_to XSS vulnerability in certain versions",
+    "description": "Checks for mail_to XSS vulnerability in certain versions",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "TranslateBug",
+    "title": "Report XSS vulnerability in translate helper",
+    "description": "Report XSS vulnerability in translate helper",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SSLVerify",
+    "title": "Checks for OpenSSL::SSL::VERIFY_NONE",
+    "description": "Checks for OpenSSL::SSL::VERIFY_NONE",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Execute",
+    "title": "Finds instances of possible command injection",
+    "description": "Finds instances of possible command injection",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "WithoutProtection",
+    "title": "Check for mass assignment using without_protection",
+    "description": "Check for mass assignment using without_protection",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Render",
+    "title": "Finds calls to render that might allow file access",
+    "description": "Finds calls to render that might allow file access",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "FileDisclosure",
+    "title": "Checks for versions with file existence disclosure vulnerability",
+    "description": "Checks for versions with file existence disclosure vulnerability",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Send",
+    "title": "Check for unsafe use of Object#send",
+    "description": "Check for unsafe use of Object#send",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "LinkToHref",
+    "title": "Checks to see if values used for hrefs are sanitized using a :url_safe_method to protect against javascript:/data: XSS",
+    "description": "Checks to see if values used for hrefs are sanitized using a :url_safe_method to protect against javascript:/data: XSS",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "JSONParsing",
+    "title": "Checks for JSON parsing vulnerabilities CVE-2013-0333 and CVE-2013-0269",
+    "description": "Checks for JSON parsing vulnerabilities CVE-2013-0333 and CVE-2013-0269",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "HeaderDoS",
+    "title": "Checks for header DoS (CVE-2013-6414)",
+    "description": "Checks for header DoS (CVE-2013-6414)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SelectVulnerability",
+    "title": "Looks for unsafe uses of select() helper",
+    "description": "Looks for unsafe uses of select() helper",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SafeBufferManipulation",
+    "title": "Check for Rails versions with SafeBuffer bug",
+    "description": "Check for Rails versions with SafeBuffer bug",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "UnsafeReflection",
+    "title": "Checks for unsafe reflection",
+    "description": "Checks for unsafe reflection",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ModelAttributes",
+    "title": "Reports models which do not use attr_restricted and warns on models that use attr_protected",
+    "description": "Reports models which do not use attr_restricted and warns on models that use attr_protected",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "CrossSiteScripting",
+    "title": "Checks for unescaped output in views",
+    "description": "Checks for unescaped output in views",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ModelAttrAccessible",
+    "title": "Reports models which have dangerous attributes defined under the attr_accessible whitelist.",
+    "description": "Reports models which have dangerous attributes defined under the attr_accessible whitelist.",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ValidationRegex",
+    "title": "Report uses of validates_format_of with improper anchors",
+    "description": "Report uses of validates_format_of with improper anchors",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SQL",
+    "title": "Check for SQL injection",
+    "description": "Check for SQL injection",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "NestedAttributes",
+    "title": "Checks for nested attributes vulnerability in Rails 2.3.9 and 3.0.0",
+    "description": "Checks for nested attributes vulnerability in Rails 2.3.9 and 3.0.0",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ModelSerialize",
+    "title": "Report uses of serialize in versions vulnerable to CVE-2013-0277",
+    "description": "Report uses of serialize in versions vulnerable to CVE-2013-0277",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "YAMLParsing",
+    "title": "Checks for YAML parsing vulnerabilities (CVE-2013-0156)",
+    "description": "Checks for YAML parsing vulnerabilities (CVE-2013-0156)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Evaluation",
+    "title": "Searches for evaluation of user input",
+    "description": "Searches for evaluation of user input",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SessionSettings",
+    "title": "Checks for session key length and http_only settings",
+    "description": "Checks for session key length and http_only settings",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "RegexDoS",
+    "title": "Searches regexes including user input",
+    "description": "Searches regexes including user input",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "StripTags",
+    "title": "Report strip_tags vulnerabilities CVE-2011-2931 and CVE-2012-3465",
+    "description": "Report strip_tags vulnerabilities CVE-2011-2931 and CVE-2012-3465",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "CreateWith",
+    "title": "Checks for strong params bypass in CVE-2014-3514",
+    "description": "Checks for strong params bypass in CVE-2014-3514",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "LinkTo",
+    "title": "Checks for XSS in link_to in versions before 3.0",
+    "description": "Checks for XSS in link_to in versions before 3.0",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "JRubyXML",
+    "title": "Checks for versions with JRuby XML parsing backend",
+    "description": "Checks for versions with JRuby XML parsing backend",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "DefaultRoutes",
+    "title": "Checks for default routes",
+    "description": "Checks for default routes",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SkipBeforeFilter",
+    "title": "Warn when skipping CSRF or authentication checks by default",
+    "description": "Warn when skipping CSRF or authentication checks by default",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SimpleFormat",
+    "title": "Checks for simple_format XSS vulnerability (CVE-2013-6416) in certain versions",
+    "description": "Checks for simple_format XSS vulnerability (CVE-2013-6416) in certain versions",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ForgerySetting",
+    "title": "Verifies that protect_from_forgery is enabled in ApplicationController",
+    "description": "Verifies that protect_from_forgery is enabled in ApplicationController",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "DigestDoS",
+    "title": "Checks for digest authentication DoS vulnerability",
+    "description": "Checks for digest authentication DoS vulnerability",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "FileAccess",
+    "title": "Finds possible file access using user input",
+    "description": "Finds possible file access using user input",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "RenderDoS",
+    "title": "Warn about denial of service with render :text (CVE-2014-0082)",
+    "description": "Warn about denial of service with render :text (CVE-2014-0082)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "BasicAuth",
+    "title": "Checks for the use of http_basic_authenticate_with",
+    "description": "Checks for the use of http_basic_authenticate_with",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "UnscopedFind",
+    "title": "Check for unscoped ActiveRecord queries",
+    "description": "Check for unscoped ActiveRecord queries",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "FilterSkipping",
+    "title": "Checks for versions 3.0-3.0.9 which had a vulnerability in filters",
+    "description": "Checks for versions 3.0-3.0.9 which had a vulnerability in filters",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "XMLDoS",
+    "title": "Checks for XML denial of service (CVE-2015-3227)",
+    "description": "Checks for XML denial of service (CVE-2015-3227)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SQLCVEs",
+    "title": "Checks for several SQL CVEs",
+    "description": "Checks for several SQL CVEs",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Redirect",
+    "title": "Looks for calls to redirect_to with user input as arguments",
+    "description": "Looks for calls to redirect_to with user input as arguments",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SelectTag",
+    "title": "Looks for unsafe uses of select_tag() in some versions of Rails 3.x",
+    "description": "Looks for unsafe uses of select_tag() in some versions of Rails 3.x",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "EscapeFunction",
+    "title": "Checks for versions before 2.3.14 which have a vulnerable escape method",
+    "description": "Checks for versions before 2.3.14 which have a vulnerable escape method",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "Deserialize",
+    "title": "Checks for unsafe deserialization of objects",
+    "description": "Checks for unsafe deserialization of objects",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SingleQuotes",
+    "title": "Check for versions which do not escape single quotes (CVE-2012-3464)",
+    "description": "Check for versions which do not escape single quotes (CVE-2012-3464)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ResponseSplitting",
+    "title": "Report response splitting in Rails 2.3.0 - 2.3.13",
+    "description": "Report response splitting in Rails 2.3.0 - 2.3.13",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "QuoteTableName",
+    "title": "Checks for quote_table_name vulnerability in versions before 2.3.14 and 3.0.10",
+    "description": "Checks for quote_table_name vulnerability in versions before 2.3.14 and 3.0.10",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SendFile",
+    "title": "Check for user input in uses of send_file",
+    "description": "Check for user input in uses of send_file",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "ContentTag",
+    "title": "Checks for XSS in calls to content_tag",
+    "description": "Checks for XSS in calls to content_tag",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "I18nXSS",
+    "title": "Checks for i18n XSS (CVE-2013-4491)",
+    "description": "Checks for i18n XSS (CVE-2013-4491)",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "NumberToCurrency",
+    "title": "Checks for number helpers XSS vulnerabilities in certain versions",
+    "description": "Checks for number helpers XSS vulnerabilities in certain versions",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SanitizeMethods",
+    "title": "Checks for versions with vulnerable sanitize and sanitize_css",
+    "description": "Checks for versions with vulnerable sanitize and sanitize_css",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "RenderInline",
+    "title": "Checks for cross site scripting in render calls",
+    "description": "Checks for cross site scripting in render calls",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "SymbolDoSCVE",
+    "title": "Checks for versions with ActiveRecord symbol denial of service vulnerability",
+    "description": "Checks for versions with ActiveRecord symbol denial of service vulnerability",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "DetailedExceptions",
+    "title": "Checks for information disclosure displayed via detailed exceptions",
+    "description": "Checks for information disclosure displayed via detailed exceptions",
+    "timeToFix": 5
+  },
+  {
+    "patternId": "MassAssignment",
+    "title": "Finds instances of mass assignment",
+    "description": "Finds instances of mass assignment",
+    "timeToFix": 5
+  }
 ]
