@@ -23,7 +23,6 @@ object Brakeman extends Tool {
 
 
   override def apply(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[Iterable[Result]] = {
-    //Use this method to make sure results are for selected files only
     def isEnabled(result: Result) = conf.map(_.exists(_.patternId == result.patternId)).getOrElse(true)
 
     val command = getCommandFor(path, conf, files)
@@ -103,7 +102,7 @@ object Brakeman extends Tool {
       case 86 => "ForgerySetting"
       case 87 => "JSONEncoding"
       case 88 => "XMLDoS"
-      case _ => "Unknow Error"
+      case _ => "UnknowError"
     }
   }
 
@@ -161,5 +160,3 @@ object Brakeman extends Tool {
 }
 
 case class BrakemanParserException(message: String) extends Exception(message)
-
-
