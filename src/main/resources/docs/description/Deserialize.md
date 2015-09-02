@@ -1,4 +1,4 @@
 Checks for unsafe deserialization of objects
 
 
-[SOURCE](unsafe_deserialization)
+[SOURCE](http://brakemanscanner.org/docs/warning_types/unsafe_deserialization/)

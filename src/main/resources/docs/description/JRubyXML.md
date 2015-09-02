@@ -1,4 +1,4 @@
 Checks for versions with JRuby XML parsing backend
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[SOURCE](https://groups.google.com/d/msg/rubyonrails-security/KZwsQbYsOiI/5kUV7dSCJGwJ)

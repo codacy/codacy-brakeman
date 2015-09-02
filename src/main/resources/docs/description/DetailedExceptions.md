@@ -1,4 +1,4 @@
 Checks for information disclosure displayed via detailed exceptions
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[SOURCE](http://brakemanscanner.org/docs/warning_types/information_disclosure/)

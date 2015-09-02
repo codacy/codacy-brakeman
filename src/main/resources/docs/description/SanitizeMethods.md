@@ -1,4 +1,4 @@
 Checks for versions with vulnerable sanitize and sanitize_css
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[SOURCE](https://groups.google.com/d/msg/rubyonrails-security/zAAU7vGTPvI/1vZDWXqB)

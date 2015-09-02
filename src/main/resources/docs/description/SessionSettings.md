@@ -1,4 +1,4 @@
 Checks for session key length and http_only settings
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[SOURCE](http://brakemanscanner.org/docs/warning_types/session_setting/)
