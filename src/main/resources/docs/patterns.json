@@ -267,11 +267,6 @@
       "category": "Security"
     },
     {
-      "patternId": "NumberToCurrency",
-      "level": "Warning",
-      "category": "Security"
-    },
-    {
       "patternId": "SanitizeMethods",
       "level": "Warning",
       "category": "Security"
