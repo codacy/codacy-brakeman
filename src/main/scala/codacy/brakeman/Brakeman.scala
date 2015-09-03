@@ -129,7 +129,6 @@ object Brakeman extends Tool {
 
   def stripPath(filename: String, path: String): String = {
 
-    println(s"PATH = $path")
     val FilenameRegex = s""".*$path/(.*)""".r
 
     filename match {
