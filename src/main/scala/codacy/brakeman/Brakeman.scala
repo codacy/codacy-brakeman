@@ -27,8 +27,12 @@ object Brakeman extends Tool {
 
     def isEnabled(result: Result) = {
       result match {
-        case res : Issue => conf.map(_.exists{_.patternId == res.patternId}).getOrElse(true)
-        case res : FileError => files.map(_.exists(_.toString == res.filename)).getOrElse(true)
+        case res : Issue =>
+          conf.map(_.exists{_.patternId == res.patternId}).getOrElse(true) &&
+            files.map(_.exists(_.toString == res.filename.value)).getOrElse(true)
+
+        case res : FileError =>
+          files.map(_.exists(_.toString == res.filename.value)).getOrElse(true)
       }
     }
 
