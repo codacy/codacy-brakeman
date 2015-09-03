@@ -1,4 +1,4 @@
-Check for versions which do not escape single quotes (CVE-2012-3464)
-
+There is a vulnerability in the HTML escaping code in Ruby on Rails.
+This vulnerability has been assigned the CVE identifier CVE-2012-3464.
 
 [SOURCE](https://groups.google.com/d/topic/rubyonrails-security/kKGNeMrnmiY/discussion)
