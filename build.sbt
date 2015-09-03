@@ -1,6 +1,9 @@
 import com.typesafe.sbt.packager.docker._
 
-resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
+resolvers ++= Seq(
+  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/releases",
+  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
+)
 
 name := """codacy-engine-brakeman"""
 
@@ -11,7 +14,8 @@ val languageVersion = "2.11.7"
 scalaVersion := languageVersion
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play-json" % "2.3.8"
+  "com.typesafe.play" %% "play-json" % "2.3.8",
+  "com.codacy" %% "codacy-engine-scala-seed" % "1.1.0"
 )
 
 enablePlugins(JavaAppPackaging)

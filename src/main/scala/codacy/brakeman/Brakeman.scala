@@ -1,10 +1,10 @@
 package codacy.brakeman
 
-import java.nio.file.{Paths, Files, Path}
+import java.nio.file.Path
 import codacy.dockerApi._
 import play.api.libs.json._
 import scala.sys.process._
-import scala.util.{ Success, Properties, Try}
+import scala.util.Try
 
 import play.api.libs.functional.syntax._
 
@@ -21,15 +21,22 @@ object  WarnResult {
 
 object Brakeman extends Tool {
 
-
   override def apply(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[Iterable[Result]] = {
-    def isEnabled(result: Result) = conf.map(_.exists(_.patternId == result.patternId)).getOrElse(true)
+
+    implicit val sourcePath = path.toString
+
+    def isEnabled(result: Result) = {
+      result match {
+        case res : Issue => conf.map(_.exists{_.patternId == res.patternId}).getOrElse(true)
+        case res : FileError => files.map(_.exists(_.toString == res.filename)).getOrElse(true)
+      }
+    }
 
     val command = getCommandFor(path, conf, files)
 
     val resultFromTool = command.lineStream(ProcessLogger(_ => ()))
 
-    val results = parseToolResult(resultFromTool)
+    val results = parseToolResult(resultFromTool, path)
 
     Try(results.filter(isEnabled))
   }
@@ -115,32 +122,46 @@ object Brakeman extends Tool {
         val patternId = PatternId(warningToPatternId(res.warningCode))
         val line = ResultLine(res.line)
 
-        Result(source, resultMessage, patternId, line)
+        Issue(source, resultMessage, patternId, line)
     }
 
   }
 
-  def parseToolResult(resultFromTool: Stream[String]): Iterable[Result] = {
+  def stripPath(filename: String, path: String): String = {
+
+    println(s"PATH = $path")
+    val FilenameRegex = s""".*$path/(.*)""".r
+
+    filename match {
+      case FilenameRegex(res) => res;
+      case _ => filename
+    }
+  }
+
+  def errorToResult(err: JsValue, path: String): Option[Result] = {
 
     lazy val ErrorPattern = """(.+):\s*([0-9]+)\s*::(.+)""".r
 
+    val errorString = (err \ "error").asOpt[String].getOrElse("")
+
+    errorString match {
+      case ErrorPattern(filename, line, msg) =>
+        Some(FileError(SourcePath(stripPath(filename, path)), Some(ErrorMessage(s"On line $line: $msg"))))
+      case _ => None
+    }
+
+  }
+
+  def parseToolResult(resultFromTool: Stream[String], path: Path): Iterable[Result] = {
+
+
     val jsonResult = Json.parse(resultFromTool.mkString)
 
-    val errors = (jsonResult \ "errors").asOpt[JsArray]
-      .fold(Seq[JsValue]())(arr => arr.value)
-      .map(err => err \ "error")
-      .map(err => err.asOpt[String]
-      .getOrElse(""))
-
-    errors.foreach{
-      case ErrorPattern(filename, line, msg) =>
-        println(s"TODO: Error at $filename;\n  line $line;\n  msg = $msg")
-      case err => println(s"TODO: Generic error => $err")
-    }
+    val errors = (jsonResult \ "errors").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
 
     val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
 
-    warnings.flatMap(warningToResult)
+    warnings.flatMap(warningToResult) ++ errors.flatMap(err => errorToResult(err, path.toString))
   }
 
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
@@ -151,7 +172,7 @@ object Brakeman extends Tool {
 
     val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold(Seq[String]()) {
       patterns =>
-        val patternsIds = patterns.map(p => p.patternId.toString)
+        val patternsIds = patterns.map(p => p.patternId.value)
         Seq("-t", patternsIds.mkString(","))
     }
 
