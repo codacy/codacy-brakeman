@@ -1,9 +1,4 @@
-import com.typesafe.sbt.packager.docker._
-
-resolvers ++= Seq(
-  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/releases",
-  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
-)
+import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
 name := """codacy-engine-brakeman"""
 
@@ -13,9 +8,14 @@ val languageVersion = "2.11.7"
 
 scalaVersion := languageVersion
 
+resolvers ++= Seq(
+  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/releases",
+  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
+)
+
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.3.8",
-  "com.codacy" %% "codacy-engine-scala-seed" % "1.1.0"
+  "com.codacy" %% "codacy-engine-scala-seed" % "1.4.0"
 )
 
 enablePlugins(JavaAppPackaging)
@@ -42,17 +42,24 @@ mappings in Universal <++= (resourceDirectory in Compile) map { (resourceDir: Fi
     } yield path -> path.toString.replaceFirst(src.toString, dest)
 }
 
-daemonUser in Docker := "docker"
+
+val dockerUser = "docker"
+val dockerGroup = "docker"
+
+daemonUser in Docker := dockerUser
+
+daemonGroup in Docker := dockerGroup
 
 dockerBaseImage := "frolvlad/alpine-oraclejdk8"
 
-dockerCommands := dockerCommands.value.flatMap{
-  case cmd@Cmd("WORKDIR",_) => List(cmd,
+dockerCommands := dockerCommands.value.flatMap {
+  case cmd@Cmd("WORKDIR", _) => List(cmd,
     Cmd("RUN", installAll)
   )
-  case cmd@(Cmd("ADD","opt /opt")) => List(cmd,
+  case cmd@(Cmd("ADD", "opt /opt")) => List(cmd,
     Cmd("RUN", "mv /opt/docker/docs /docs"),
-    Cmd("RUN", "adduser -u 2004 -D docker")
+    Cmd("RUN", "adduser -u 2004 -D docker"),
+    ExecCmd("RUN", Seq("chown", "-R", s"$dockerUser:$dockerGroup", "/docs"): _*)
   )
   case other => List(other)
 }
