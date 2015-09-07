@@ -23,16 +23,14 @@ object Brakeman extends Tool {
 
   override def apply(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[Iterable[Result]] = {
 
-    implicit val sourcePath = path.toString
-
     def isEnabled(result: Result) = {
       result match {
         case res : Issue =>
           conf.map(_.exists{_.patternId == res.patternId}).getOrElse(true) &&
-            files.map(_.exists(_.toString == res.filename.value)).getOrElse(true)
+              files.map(_.exists(_.toString.endsWith(res.filename.value))).getOrElse(true)
 
         case res : FileError =>
-          files.map(_.exists(_.toString == res.filename.value)).getOrElse(true)
+          files.map(_.exists(_.toString.endsWith(res.filename.value))).getOrElse(true)
       }
     }
 
@@ -169,17 +167,13 @@ object Brakeman extends Tool {
 
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
 
-    val filesToTest = files.filter(paths => paths.nonEmpty).fold(Seq[String]()) {
-      paths => Seq("--only-files", paths.mkString(","))
-    }
-
     val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold(Seq[String]()) {
       patterns =>
         val patternsIds = patterns.map(p => p.patternId.value)
         Seq("-t", patternsIds.mkString(","))
     }
 
-    Seq("brakeman", path.toString) ++ filesToTest ++ Seq( "-f", "json") ++ patternsToTest
+    Seq("brakeman", "-f", "json") ++ patternsToTest ++ Seq(path.toString)
   }
 }
 
