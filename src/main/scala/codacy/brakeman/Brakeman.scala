@@ -8,14 +8,14 @@ import scala.util.Try
 
 import play.api.libs.functional.syntax._
 
-case class WarnResult(warningCode: Int, message: String, file: String, line: Int)
+case class WarnResult(warningCode: Int, message: String, file: String, line: JsValue)
 
 object  WarnResult {
   implicit val warnReads = (
     (__ \ "warning_code").read[Int] and
       (__ \ "message").read[String] and
       (__ \ "file").read[String] and
-      (__ \ "line").read[Int]
+      (__ \ "line").read[JsValue]
     )(WarnResult.apply _)
 }
 
@@ -117,12 +117,18 @@ object Brakeman extends Tool {
 
   def warningToResult(warn: JsValue): Option[Result] = {
 
+    //In our tests we have the pattern and the error type
+    lazy val defaultLineWarning = 1
+
     warn.asOpt[WarnResult].map{
       res =>
         val source = SourcePath(res.file)
         val resultMessage = ResultMessage(res.message)
         val patternId = PatternId(warningToPatternId(res.warningCode))
-        val line = ResultLine(res.line)
+        val line = ResultLine(res.line match {
+          case lineNumber: JsNumber => lineNumber.value.toInt
+          case _ => defaultLineWarning
+        })
 
         Issue(source, resultMessage, patternId, line)
     }
