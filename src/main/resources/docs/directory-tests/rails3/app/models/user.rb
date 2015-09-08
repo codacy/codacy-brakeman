@@ -1,3 +1,4 @@
+##Patterns: SanitizeMethods
 class User < ActiveRecord::Base
   #Should not raise a warning
   def unused_sql
@@ -37,6 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def sanitized_profile
+    ##Warn: SanitizeMethods
     sanitize self.profile.to_s
   end
 

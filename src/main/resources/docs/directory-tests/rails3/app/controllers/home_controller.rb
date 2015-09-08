@@ -1,3 +1,5 @@
+##Patterns: Deserialize,Execute
+
 class HomeController < ApplicationController
   before_filter :filter_it, :only => :test_filter
 
@@ -31,8 +33,10 @@ class HomeController < ApplicationController
   end
 
   def test_command
+    ##Warn: Execute
     `ls #{params[:file_name]}`
 
+    ##Warn: Execute
     system params[:user_input]
   end
 
@@ -103,6 +107,7 @@ class HomeController < ApplicationController
 
   def test_yaml_file_access
     #Should not warn about access, but about remote code execution
+    ##Warn: Deserialize
     YAML.load "some/path/#{params[:user][:file]}"
 
     #Should warn
@@ -120,16 +125,23 @@ class HomeController < ApplicationController
   end
 
   def test_yaml_load
+    ##Warn: Deserialize
     YAML.load params[:input]
     YAML.load some_method #No warning
+    ##Warn: Deserialize
     YAML.load x(cookies[:store])
+    ##Warn: Deserialize
     YAML.load User.first.bad_stuff
   end
 
   def test_more_yaml_methods
+    ##Warn: Deserialize
     YAML.load_documents params[:input]
+    ##Warn: Deserialize
     YAML.load_stream cookies[:thing]
+    ##Warn: Deserialize
     YAML.parse_documents "a: #{params[:a]}"
+    ##Warn: Deserialize
     YAML.parse_stream User.find(1).upload
   end
 
@@ -143,14 +155,23 @@ class HomeController < ApplicationController
   end
 
   def test_more_ways_to_execute
+    ##Warn: Execute
     Open3.capture2 "ls #{params[:dir]}"
+    ##Warn: Execute
     Open3.capture2e "ls #{params[:dir]}"
+    ##Warn: Execute
     Open3.capture3 "ls #{params[:dir]}"
-    Open3.pipeline "sort", "uniq", :in => params[:file] 
+    ##Warn: Execute
+    Open3.pipeline "sort", "uniq", :in => params[:file]
+    ##Warn: Execute
     Open3.pipeline_r "sort #{params[:file]}", "uniq"
+    ##Warn: Execute
     Open3.pipeline_rw params[:cmd], "sort -g"
+    ##Warn: Execute
     Open3.pipeline_start *params[:cmds]
+    ##Warn: Execute
     spawn "some_cool_command #{params[:opts]}"
+    ##Warn: Execute
     POSIX::Spawn::spawn params[:cmd]
   end
 
