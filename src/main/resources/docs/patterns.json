@@ -252,11 +252,6 @@
       "category": "Security"
     },
     {
-      "patternId": "SendFile",
-      "level": "Warning",
-      "category": "Security"
-    },
-    {
       "patternId": "ContentTag",
       "level": "Warning",
       "category": "Security"

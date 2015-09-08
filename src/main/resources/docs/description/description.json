@@ -300,12 +300,6 @@
     "timeToFix": 20
   },
   {
-    "patternId": "SendFile",
-    "title": "Prohibits user input in send_file",
-    "description": "Prohibits user input in uses of send_file",
-    "timeToFix": 20
-  },
-  {
     "patternId": "ContentTag",
     "title": "Prohibits unescaped values in content_tag",
     "description": "Prohibits unescaped values in content_tag",
