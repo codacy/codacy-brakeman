@@ -1,3 +1,4 @@
+##Patterns: RenderInline,RegexDoS
 class AnotherController < ApplicationController
   def overflow
     @test = @test.where.all
@@ -21,12 +22,18 @@ class AnotherController < ApplicationController
   def render_stuff
     user_name = User.current_user.name
 
+    ##Warn: RenderInline
     render :text => "Welcome back, #{params[:name]}!}"
+    ##Warn: RenderInline
     render :text => "Welcome back, #{user_name}!}"
+    ##Warn: RenderInline
     render :text => params[:q]
+    ##Warn: RenderInline
     render :text => user_name
 
+    ##Warn: RenderInline
     render :inline => "<%= #{params[:name]} %>"
+    ##Warn: RenderInline
     render :inline => "<%= #{user_name} %>"
 
     # should not warn
@@ -35,6 +42,7 @@ class AnotherController < ApplicationController
   end
 
   def use_params_in_regex
+    ##Warn: RegexDoS
     @x = something.match /#{params[:x]}/
   end
 

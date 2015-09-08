@@ -1,3 +1,4 @@
+##Patterns: FileAccess,SkipBeforeFilter,Evaluation,Render,CreateWith
 class UsersController < ApplicationController
   def test_sql_sanitize
     User.where("age > #{sanitize params[:age]}")
@@ -8,14 +9,17 @@ class UsersController < ApplicationController
   prepend_before_action :safe_set_page, :only => :test_prepend_before_action
   append_before_action :safe_set_page, :only => :test_append_before_action
 
+  ##Warn: SkipBeforeFilter
   skip_before_action :verify_authenticity_token, :except => [:unsafe_stuff]
 
   def test_before_action
+    ##Warn: Render
     render @page
   end
 
   # Call safe_set_page then set_page
   def test_prepend_before_action
+    ##Warn: Render
     render @page # should not be safe
   end
 
@@ -54,11 +58,15 @@ class UsersController < ApplicationController
   end
 
   def mass_assignment_bypass
+    ##Warn: CreateWith
     User.create_with(params)  # high warning
+    ##Warn: CreateWith
     User.create_with(params).create # high warning
     User.create_with(params[:x].permit(:y)) # should not warn, workaround
     something.create_with({}) # should not warn on hash literals
+    ##Warn: CreateWith
     x.create_with(y(params))  # medium warning
+    ##Warn: CreateWith
     y.create_with(x)          # weak warning
   end
 
@@ -78,13 +86,18 @@ class UsersController < ApplicationController
   end
 
   def open_stuff
+    ##Warn: FileAccess
     open(params[:url]) # remote code execution warning
+    ##Warn: FileAccess
     Kernel.open(URI(params[:url])) # file access and RCE warning
+    ##Warn: FileAccess
     open("#{params[:x]}/something/something") # remote code execution warning
+    ##Warn: FileAccess
     open("some_path/#{params[:x]}/something/something") # file access warning
   end
 
   def eval_it
+    ##Warn: Evaluation
     @x = eval(params[:x])
   end
 end

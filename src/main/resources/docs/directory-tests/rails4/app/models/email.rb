@@ -1,3 +1,4 @@
+##Patterns: ValidationRegex
 class Email < ActiveRecord::Base
   attr_accessible :email
 
@@ -5,6 +6,7 @@ class Email < ActiveRecord::Base
 
   EMAIL_REGEX = /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/
 
+  ##Warn: ValidationRegex
   validates_format_of :email, with: EMAIL_REGEX
 
   scope :assigned_to_user, ->(user) {

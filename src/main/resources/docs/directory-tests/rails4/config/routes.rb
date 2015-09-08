@@ -1,3 +1,6 @@
+##Patterns: DefaultRoutes
+##Issue: {"severity": "Warn", "line": 1, "patternId": "DefaultRoutes"}
+
 Rails4::Application.routes.draw do
   resources not_a_symbol, :controller => :whatever
 

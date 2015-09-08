@@ -1,3 +1,4 @@
+##Patterns: SSLVerify
 class ApplicationController < ActionController::API
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -21,6 +22,7 @@ class ApplicationController < ActionController::API
 
   def bypass_ssl_check
     # Should warn on self.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    ##Warn: SSLVerify
     self.verify_mode = OpenSSL::SSL::VERIFY_NONE
   end
 

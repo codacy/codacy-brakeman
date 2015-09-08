@@ -1,3 +1,6 @@
+##Patterns: ModelAttrAccessible
+##Issue: {"severity": "Warn", "line": 1, "patternId": "ModelAttrAccessible"}
+
 class Account < ActiveRecord::Base
   attr_accessible :name, :account_id, :admin
 

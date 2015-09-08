@@ -1,4 +1,4 @@
-##Patterns: SQL,Redirect
+##Patterns: SQL,Redirect,MassAssignment,Send
 
 class FriendlyController
   some_helper_thing do
@@ -23,24 +23,28 @@ class FriendlyController
 
   def mass_assign_user
     # Should warn about permit!
+    ##Warn: MassAssignment
     x = params.permit!
     @user = User.new(x)
   end
 
   def mass_assign_protected_model
     # Warns with medium confidence because Account uses attr_accessible
+    ##Warn: MassAssignment
     params.permit!
     Account.new(params)
   end
 
   def permit_without_usage
     # Warns with medium confidence because there is no mass assignment
+    ##Warn: MassAssignment
     params.permit!
   end
 
   def permit_after_usage
     # Warns with medium confidence because permit! is called after mass assignment
     User.new(params)
+    ##Warn: MassAssignment
     params.permit!
   end
 
@@ -77,6 +81,7 @@ class FriendlyController
   end
 
   def send_some_stuff
+    ##Warn: Send
     blah.send(params[:x]).to_json
   end
 end
