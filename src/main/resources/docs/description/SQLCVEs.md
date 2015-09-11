@@ -5,4 +5,4 @@ crafted strings can be used to save data in PostgreSQL array columns that may
 not be intended. This vulnerability has been assigned the CVE identifier
 CVE-2014-0080.
 
-[SOURCE](https://groups.google.com/d/msg/rubyonrails-security/Wu96YkTUR6s/pPLBMZrlwvYJ)
+[Source](https://groups.google.com/d/msg/rubyonrails-security/Wu96YkTUR6s/pPLBMZrlwvYJ)

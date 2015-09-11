@@ -9,4 +9,4 @@ For example
 
 This type of vulnerability can be used to access arbitrary files on a server (including /etc/passwd.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/file_access/)
+[Source](http://brakemanscanner.org/docs/warning_types/file_access/)

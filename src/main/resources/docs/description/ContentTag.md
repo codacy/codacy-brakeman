@@ -12,4 +12,4 @@ Warns for unescaped values in `content_tag`
             Escaped by default, can be explicitly escaped
             or not by passing in (true|false) as fourth argument
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[Source](http://brakemanscanner.org/docs/warning_types/)

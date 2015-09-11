@@ -4,4 +4,4 @@ the html, it must also be url safe as determined by calling a
 :url_safe_method.  This prevents attacks such as javascript:evil() or
 data:<encoded XSS> which is html_safe, but not safe as an href
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/)
+[Source](http://brakemanscanner.org/docs/warning_types/)

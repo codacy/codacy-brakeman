@@ -3,4 +3,4 @@ versions of Ruby on Rails.  An attacker could manipulate form parameters
 and make changes to records other than those the developer intended.
 This vulnerability has been assigned the identifier CVE-2010-3933.
 
-[SOURCE](https://groups.google.com/d/topic/rubyonrails-security/-fkT0yja_gw/discussion)
+[Source](https://groups.google.com/d/topic/rubyonrails-security/-fkT0yja_gw/discussion)

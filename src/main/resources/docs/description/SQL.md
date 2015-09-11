@@ -26,4 +26,4 @@ This results in this kind of warning:
     Possible SQL injection near line 37:
     User.first.where((((("username = '" + params[:user][:name].downcase) + "' AND password = '") + params[:user][:password]) + "'"))
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/sql_injection/)
+[Source](http://brakemanscanner.org/docs/warning_types/sql_injection/)

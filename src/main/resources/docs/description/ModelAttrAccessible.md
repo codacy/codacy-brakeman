@@ -5,4 +5,4 @@ In particular, this check looks for attr_accessible inside model definitions. If
 The tool also warns on use of attr_protected - especially since it was found to be vulnerable to bypass.
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/attribute_restriction/)
+[Source](http://brakemanscanner.org/docs/warning_types/attribute_restriction/)

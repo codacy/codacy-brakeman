@@ -4,4 +4,4 @@ The obvious form of this is the use of eval with user input.
 
 However, we report on dangerous uses of send, constantize, and other methods which allow creation of arbitrary objects or calling of arbitrary methods.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/remote_code_execution/)
+[Source](http://brakemanscanner.org/docs/warning_types/remote_code_execution/)

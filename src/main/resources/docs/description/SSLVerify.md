@@ -26,4 +26,4 @@ To ensure that SSL verification happens use the following mode:
 
 If the server certificate is invalid or context.ca_file is not set when verifying peers an OpenSSL::SSL::SSLError will be raised.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/ssl_verification_bypass/)
+[Source](http://brakemanscanner.org/docs/warning_types/ssl_verification_bypass/)

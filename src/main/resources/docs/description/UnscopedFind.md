@@ -11,4 +11,4 @@ Instead, it should be scoped to the currently logged-in user:
     current_user = User.find(session[:user_id])
     current_user.accounts.find(params[:id])
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/unscoped_find/)
+[Source](http://brakemanscanner.org/docs/warning_types/unscoped_find/)

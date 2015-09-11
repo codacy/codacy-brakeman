@@ -12,4 +12,4 @@ The example provided in the official Rails Guide looks like this:
     
 This warning will be raised if http_basic_authenticate_with is used and the password is found to be a string (i.e., stored somewhere in the code).
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/basic_authentication/)
+[Source](http://brakemanscanner.org/docs/warning_types/basic_authentication/)

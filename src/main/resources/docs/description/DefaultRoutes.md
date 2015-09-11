@@ -16,4 +16,4 @@ If this warning is reported for a particular controller, it means there is a rou
 Default routes can be dangerous if methods are made public which are not intended to be used as URLs or actions.
 
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/default_routes/)
+[Source](http://brakemanscanner.org/docs/warning_types/default_routes/)

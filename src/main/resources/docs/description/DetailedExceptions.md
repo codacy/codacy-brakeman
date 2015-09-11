@@ -7,4 +7,4 @@ For example, Rails provides detailed exception reports by default in the develop
 
 This settings should not be true in production, and neither should be a show_detailed_exceptions? method in a controller which does not return false.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/information_disclosure/)
+[Source](http://brakemanscanner.org/docs/warning_types/information_disclosure/)

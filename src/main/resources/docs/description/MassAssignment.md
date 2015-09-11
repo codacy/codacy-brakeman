@@ -26,4 +26,4 @@ Unfortunately, it can also easily be bypassed:
 
 The tool will warn on uses of without_protection.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/mass_assignment/)
+[Source](http://brakemanscanner.org/docs/warning_types/mass_assignment/)

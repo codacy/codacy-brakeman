@@ -29,4 +29,4 @@ Safe:
     args = params["args"] || []
     @result = User.send(:method, *args)
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/dangerous_send/)
+[Source](http://brakemanscanner.org/docs/warning_types/dangerous_send/)

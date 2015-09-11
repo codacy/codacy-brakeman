@@ -25,4 +25,4 @@ Avoiding the warning itself becomes silly:
       end
     end
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/denial_of_service/)
+[Source](http://brakemanscanner.org/docs/warning_types/denial_of_service/)

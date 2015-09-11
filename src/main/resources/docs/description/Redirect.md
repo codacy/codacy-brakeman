@@ -28,4 +28,4 @@ If the first argument is a string, then it is possible to parse the string and e
 
 If the URL does not contain a protocol (e.g., http://), then you will probably get unexpected results, as redirect_to will prepend the current host name and a protocol.
 
-[SOURCE](http://brakemanscanner.org/docs/warning_types/redirect/)
+[Source](http://brakemanscanner.org/docs/warning_types/redirect/)
