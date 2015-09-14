@@ -2,9 +2,9 @@ package codacy.brakeman
 
 import java.nio.file.Path
 import codacy.dockerApi._
+import codacy.dockerApi.utils.{CommandResult, CommandRunner}
 import play.api.libs.json._
-import scala.sys.process._
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
 import play.api.libs.functional.syntax._
 
@@ -21,6 +21,10 @@ object  WarnResult {
 
 object Brakeman extends Tool {
 
+  def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
+    resultFromTool.stderr.contains("Please supply the path to a Rails application.")
+  }
+
   override def apply(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[Iterable[Result]] = {
 
     def isEnabled(result: Result) = {
@@ -36,11 +40,17 @@ object Brakeman extends Tool {
 
     val command = getCommandFor(path, conf, files)
 
-    val resultFromTool = command.lineStream(ProcessLogger(_ => ()))
-
-    val results = parseToolResult(resultFromTool, path)
-
-    Try(results.filter(isEnabled))
+    CommandRunner.exec(command) match {
+      case Right(resultFromTool) =>
+        if(checkNonRailsProject(resultFromTool)) {
+          Try(Seq())
+        }
+        else {
+          val results = parseToolResult(resultFromTool.stdout, path)
+          results.map(_.filter(isEnabled))
+        }
+      case Left(ex) => Failure(ex)
+    }
   }
 
   def warningToPatternId(warningCode: Int): String = {
@@ -169,16 +179,19 @@ object Brakeman extends Tool {
 
   }
 
-  def parseToolResult(resultFromTool: Stream[String], path: Path): Iterable[Result] = {
+  def parseToolResult(resultFromTool: Seq[String], path: Path): Try[Iterable[Result]] = {
 
+    val jsonParsed: Try[JsValue] = Try(Json.parse(resultFromTool.mkString))
 
-    val jsonResult = Json.parse(resultFromTool.mkString)
+    jsonParsed match {
+      case Success(jsonResult) =>
+        val errors = (jsonResult \ "errors").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
+        val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
 
-    val errors = (jsonResult \ "errors").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
+        Success(warnings.flatMap(warningToResult) ++ errors.flatMap(err => errorToResult(err, path.toString)))
 
-    val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
-
-    warnings.flatMap(warningToResult) ++ errors.flatMap(err => errorToResult(err, path.toString))
+      case Failure(ex) => Failure(ex)
+    }
   }
 
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
