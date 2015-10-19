@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/25f3667db77c4c638be01d9f7453dec8)](https://www.codacy.com/app/Codacy/codacy-brakeman)
 [![Build Status](https://circleci.com/gh/codacy/codacy-brakeman.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/codacy/codacy-brakeman)
 
 create the docker: sbt docker:publishLocal
