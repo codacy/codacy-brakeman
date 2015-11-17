@@ -2,7 +2,7 @@ package codacy.brakeman
 
 import java.nio.file.Path
 import codacy.dockerApi._
-import codacy.dockerApi.utils.{CommandResult, CommandRunner}
+import codacy.dockerApi.utils.{ToolHelper, CommandResult, CommandRunner}
 import play.api.libs.json._
 import scala.util.{Failure, Success, Try}
 
@@ -196,7 +196,7 @@ object Brakeman extends Tool {
 
   private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
 
-    val patternsToTest = conf.filter(patterns => patterns.nonEmpty).fold(Seq[String]()) {
+    val patternsToTest = ToolHelper.getPatternsToLint(conf).fold(Seq[String]()) {
       patterns =>
         val patternsIds = patterns.map(p => p.patternId.value)
         Seq("-t", patternsIds.mkString(","))
