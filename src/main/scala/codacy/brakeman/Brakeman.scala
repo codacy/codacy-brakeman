@@ -131,6 +131,11 @@ object Brakeman extends Tool {
       case 86 => "ForgerySetting"
       case 87 => "JSONEncoding"
       case 88 => "XMLDoS"
+      case 89 => "SafeBufferManipulation"
+      case 90 => "SendFile"
+      case 91 => "SessionManipulation"
+      case 92 => "WeakHash"
+      case 93 => "CheckModelAttributes"
       case _ => "UnknowError"
     }
   }
@@ -202,7 +207,7 @@ object Brakeman extends Tool {
         Seq("-t", patternsIds.mkString(","))
     }
 
-    Seq("brakeman", "-f", "json") ++ patternsToTest ++ Seq(path.toString)
+    Seq("brakeman", "-A", "-f", "json") ++ patternsToTest ++ Seq(path.toString)
   }
 }
 
