@@ -30,7 +30,7 @@ val installAll =
   s"""apk update && apk add bash curl &&
      |apk add --update ruby ruby-bundler ruby-dev &&
      |rm /var/cache/apk/* &&
-     |gem install brakeman""".stripMargin.replaceAll(System.lineSeparator(), " ")
+     |gem install brakeman --no-rdoc --no-ri""".stripMargin.replaceAll(System.lineSeparator(), " ")
 
 mappings in Universal <++= (resourceDirectory in Compile) map { (resourceDir: File) =>
   val src = resourceDir / "docs"
