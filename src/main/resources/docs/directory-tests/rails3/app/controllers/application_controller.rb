@@ -1,5 +1,5 @@
 ##Patterns: ForgerySetting
-##Issue: {"severity": "Warn", "line": 1, "patternId": "ForgerySetting"}
+##Issue: {"severity": "Warn", "line": 4, "patternId": "ForgerySetting"}
 
 class ApplicationController < ActionController::Base
 #  protect_from_forgery
