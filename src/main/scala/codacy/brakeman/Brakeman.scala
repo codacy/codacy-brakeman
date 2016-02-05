@@ -25,7 +25,7 @@ object Brakeman extends Tool {
     resultFromTool.stderr.contains("Please supply the path to a Rails application.")
   }
 
-  override def apply(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[Iterable[Result]] = {
+  override def apply(path: Path, conf: Option[List[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[List[Result]] = {
 
     def isEnabled(result: Result) = {
       result match {
@@ -43,7 +43,7 @@ object Brakeman extends Tool {
     CommandRunner.exec(command) match {
       case Right(resultFromTool) =>
         if(checkNonRailsProject(resultFromTool)) {
-          Try(Seq())
+          Try(List.empty)
         }
         else {
           val results = parseToolResult(resultFromTool.stdout, path)
@@ -179,14 +179,14 @@ object Brakeman extends Tool {
 
   }
 
-  def parseToolResult(resultFromTool: Seq[String], path: Path): Try[Iterable[Result]] = {
+  def parseToolResult(resultFromTool: List[String], path: Path): Try[List[Result]] = {
 
     val jsonParsed: Try[JsValue] = Try(Json.parse(resultFromTool.mkString))
 
     jsonParsed match {
       case Success(jsonResult) =>
-        val errors = (jsonResult \ "errors").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
-        val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value)
+        val errors = (jsonResult \ "errors").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value).toList
+        val warnings = (jsonResult \ "warnings").asOpt[JsArray].fold(Seq[JsValue]())(arr => arr.value).toList
 
         Success(warnings.flatMap(warningToResult) ++ errors.flatMap(err => errorToResult(err, path.toString)))
 
@@ -194,15 +194,15 @@ object Brakeman extends Tool {
     }
   }
 
-  private[this] def getCommandFor(path: Path, conf: Option[Seq[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Seq[String] = {
+  private[this] def getCommandFor(path: Path, conf: Option[List[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): List[String] = {
 
-    val patternsToTest = ToolHelper.getPatternsToLint(conf).fold(Seq[String]()) {
+    val patternsToTest = ToolHelper.getPatternsToLint(conf).fold(List[String]()) {
       patterns =>
         val patternsIds = patterns.map(p => p.patternId.value)
-        Seq("-t", patternsIds.mkString(","))
+        List("-t", patternsIds.mkString(","))
     }
 
-    Seq("brakeman", "-f", "json") ++ patternsToTest ++ Seq(path.toString)
+    List("brakeman", "-f", "json") ++ patternsToTest ++ List(path.toString)
   }
 }
 
