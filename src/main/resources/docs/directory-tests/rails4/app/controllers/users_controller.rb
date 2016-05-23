@@ -1,4 +1,4 @@
-##Patterns: FileAccess,SkipBeforeFilter,Evaluation,Render,CreateWith
+##Patterns: FileAccess,SkipBeforeFilter,Evaluation,CreateWith
 class UsersController < ApplicationController
   def test_sql_sanitize
     User.where("age > #{sanitize params[:age]}")
@@ -13,13 +13,11 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, :except => [:unsafe_stuff]
 
   def test_before_action
-    ##Warn: Render
     render @page
   end
 
   # Call safe_set_page then set_page
   def test_prepend_before_action
-    ##Warn: Render
     render @page # should not be safe
   end
 
