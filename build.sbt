@@ -26,11 +26,14 @@ version in Docker := "1.0"
 
 organization := "com.codacy"
 
+val brakemanVersion = "3.3.0"
+
 val installAll =
-  s"""apk update && apk add bash curl &&
+  s"""apk update && apk add bash curl build-base &&
      |apk add --update ruby ruby-bundler ruby-dev &&
      |rm /var/cache/apk/* &&
-     |gem install --no-document brakeman:3.1.4""".stripMargin.replaceAll(System.lineSeparator(), " ")
+     |gem install --no-ri --no-rdoc json &&
+     |gem install --no-document brakeman:$brakemanVersion""".stripMargin.replaceAll(System.lineSeparator(), " ")
 
 mappings in Universal <++= (resourceDirectory in Compile) map { (resourceDir: File) =>
   val src = resourceDir / "docs"
