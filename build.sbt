@@ -29,11 +29,12 @@ organization := "com.codacy"
 val brakemanVersion = "3.3.0"
 
 val installAll =
-  s"""apk update && apk add bash curl build-base &&
-     |apk add --update ruby ruby-bundler ruby-dev &&
-     |rm /var/cache/apk/* &&
+  s"""apk --no-cache add bash build-base ruby ruby-bundler ruby-dev &&
      |gem install --no-ri --no-rdoc json &&
-     |gem install --no-document brakeman:$brakemanVersion""".stripMargin.replaceAll(System.lineSeparator(), " ")
+     |gem install --no-ri --no-rdoc brakeman:$brakemanVersion &&
+     |gem cleanup &&
+     |apk del build-base ruby-dev &&
+     |rm -rf /var/cache/apk/*""".stripMargin.replaceAll(System.lineSeparator(), " ")
 
 mappings in Universal <++= (resourceDirectory in Compile) map { (resourceDir: File) =>
   val src = resourceDir / "docs"
@@ -53,7 +54,7 @@ daemonUser in Docker := dockerUser
 
 daemonGroup in Docker := dockerGroup
 
-dockerBaseImage := "frolvlad/alpine-oraclejdk8"
+dockerBaseImage := "develar/java"
 
 dockerCommands := dockerCommands.value.flatMap {
   case cmd@Cmd("WORKDIR", _) => List(cmd,
@@ -61,7 +62,7 @@ dockerCommands := dockerCommands.value.flatMap {
   )
   case cmd@(Cmd("ADD", "opt /opt")) => List(cmd,
     Cmd("RUN", "mv /opt/docker/docs /docs"),
-    Cmd("RUN", "adduser -u 2004 -D docker"),
+    Cmd("RUN", s"adduser -u 2004 -D $dockerUser"),
     ExecCmd("RUN", Seq("chown", "-R", s"$dockerUser:$dockerGroup", "/docs"): _*)
   )
   case other => List(other)
