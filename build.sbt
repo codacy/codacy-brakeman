@@ -15,7 +15,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.3.8",
-  "com.codacy" %% "codacy-engine-scala-seed" % "2.6.31"
+  "com.codacy" %% "codacy-engine-scala-seed" % "2.7.1"
 )
 
 enablePlugins(JavaAppPackaging)
@@ -30,6 +30,7 @@ val brakemanVersion = "3.3.0"
 
 val installAll =
   s"""apk --no-cache add bash build-base ruby ruby-bundler ruby-dev &&
+     |apk add --update ca-certificates && rm -rf /var/cache/apk/* &&
      |gem install --no-ri --no-rdoc json &&
      |gem install --no-ri --no-rdoc brakeman:$brakemanVersion &&
      |gem cleanup &&
