@@ -196,11 +196,10 @@ object Brakeman extends Tool {
 
   private[this] def getCommandFor(path: Path, conf: Option[List[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): List[String] = {
 
-    val patternsToTest = ToolHelper.getPatternsToLint(conf).fold(List[String]()) {
-      patterns =>
-        val patternsIds = patterns.map(p => p.patternId.value)
-        List("-t", patternsIds.mkString(","))
-    }
+    val patternsToTest = ToolHelper.getPatternsToLint(conf).map{ case patterns =>
+      val patternsIds = patterns.map(p => p.patternId.value)
+      List("-t", patternsIds.mkString(","))
+    }.getOrElse(List.empty)
 
     List("brakeman", "-f", "json") ++ patternsToTest ++ List(path.toString)
   }
