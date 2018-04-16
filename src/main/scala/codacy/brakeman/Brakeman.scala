@@ -201,7 +201,7 @@ object Brakeman extends Tool {
       List("-t", patternsIds.mkString(","))
     }.getOrElse(List.empty)
 
-    List("brakeman", "-f", "json") ++ patternsToTest ++ List(path.toString)
+    List("brakeman", "--faster", "-f", "json") ++ patternsToTest ++ List(path.toString)
   }
 }
 
