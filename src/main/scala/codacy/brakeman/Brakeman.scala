@@ -1,48 +1,73 @@
 package codacy.brakeman
 
-import java.nio.file.Path
-import codacy.dockerApi._
-import codacy.dockerApi.utils.{ToolHelper, CommandResult, CommandRunner}
+import codacy.docker.api._
+import codacy.dockerApi.utils.{CommandResult, CommandRunner}
 import play.api.libs.json._
-import scala.util.{Failure, Success, Try}
+import codacy.docker.api.utils.ToolHelper
 
+import scala.util.{Failure, Success, Try}
 import play.api.libs.functional.syntax._
 
 case class WarnResult(warningCode: Int, message: String, file: String, line: JsValue)
 
-object  WarnResult {
+object WarnResult {
   implicit val warnReads = (
     (__ \ "warning_code").read[Int] and
       (__ \ "message").read[String] and
       (__ \ "file").read[String] and
       (__ \ "line").read[JsValue]
-    )(WarnResult.apply _)
+    ) (WarnResult.apply _)
 }
 
 object Brakeman extends Tool {
 
-  def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
+  private val skipLibsKey = Configuration.Key("skip_libs")
+
+  private val noBranchingKey = Configuration.Key("no_branching")
+
+  private def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
     resultFromTool.stderr.contains("Please supply the path to a Rails application.")
   }
 
-  override def apply(path: Path, conf: Option[List[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): Try[List[Result]] = {
+  override def apply(path: Source.Directory, conf: Option[List[Pattern.Definition]], files: Option[Set[Source.File]],
+                     options: Map[Configuration.Key, Configuration.Value])(implicit specification: Tool.Specification): Try[List[Result]] = {
 
     def isEnabled(result: Result) = {
       result match {
-        case res : Issue =>
-          conf.map(_.exists{_.patternId == res.patternId}).getOrElse(true) &&
-              files.map(_.exists(_.toString.endsWith(res.filename.value))).getOrElse(true)
+        case res: Result.Issue =>
+          conf.map(_.exists {
+            _.patternId == res.patternId
+          }).getOrElse(true) &&
+            files.map(_.exists(_.toString.endsWith(res.file.path))).getOrElse(true)
 
-        case res : FileError =>
-          files.map(_.exists(_.toString.endsWith(res.filename.value))).getOrElse(true)
+        case res: Result.FileError =>
+          files.map(_.exists(_.toString.endsWith(res.file.path))).getOrElse(true)
+
+        case _ => true
       }
     }
 
-    val command = getCommandFor(path, conf, files)
+    val skipLibs = options.get(skipLibsKey).fold(false) {
+      value =>
+        Option(value: JsValue).collect {
+          case JsBoolean(enabled) => enabled
+          case _ => false
+        }.getOrElse(false)
+    }
+
+    val noBranching = options.get(noBranchingKey).fold(false) {
+      value =>
+        Option(value: JsValue).collect {
+          case JsBoolean(enabled) => enabled
+          case _ => false
+        }.getOrElse(false)
+    }
+
+    val command = getCommandFor(path, conf, files, skipLibs, noBranching)
 
     CommandRunner.exec(command) match {
       case Right(resultFromTool) =>
-        if(checkNonRailsProject(resultFromTool)) {
+        if (checkNonRailsProject(resultFromTool)) {
           Try(List.empty)
         }
         else {
@@ -53,7 +78,7 @@ object Brakeman extends Tool {
     }
   }
 
-  def warningToPatternId(warningCode: Int): String = {
+  private def warningToPatternId(warningCode: Int): String = {
     warningCode match {
       case 0 => "SQL"
       case 1 => "SQL"
@@ -135,27 +160,27 @@ object Brakeman extends Tool {
     }
   }
 
-  def warningToResult(warn: JsValue): Option[Result] = {
+  private def warningToResult(warn: JsValue): Option[Result] = {
 
     //In our tests we have the pattern and the error type
     lazy val defaultLineWarning = 1
 
-    warn.asOpt[WarnResult].map{
+    warn.asOpt[WarnResult].map {
       res =>
-        val source = SourcePath(res.file)
-        val resultMessage = ResultMessage(res.message)
-        val patternId = PatternId(warningToPatternId(res.warningCode))
-        val line = ResultLine(res.line match {
+        val source = Source.File(res.file)
+        val resultMessage = Result.Message(res.message)
+        val patternId = Pattern.Id(warningToPatternId(res.warningCode))
+        val line = Source.Line(res.line match {
           case lineNumber: JsNumber => lineNumber.value.toInt
           case _ => defaultLineWarning
         })
 
-        Issue(source, resultMessage, patternId, line)
+        Result.Issue(source, resultMessage, patternId, line)
     }
 
   }
 
-  def stripPath(filename: String, path: String): String = {
+  private def stripPath(filename: String, path: String): String = {
 
     val FilenameRegex = s""".*$path/(.*)""".r
 
@@ -165,7 +190,7 @@ object Brakeman extends Tool {
     }
   }
 
-  def errorToResult(err: JsValue, path: String): Option[Result] = {
+  private def errorToResult(err: JsValue, path: String): Option[Result] = {
 
     lazy val ErrorPattern = """(.+):\s*([0-9]+)\s*::(.+)""".r
 
@@ -173,13 +198,13 @@ object Brakeman extends Tool {
 
     errorString match {
       case ErrorPattern(filename, line, msg) =>
-        Some(FileError(SourcePath(stripPath(filename, path)), Some(ErrorMessage(s"On line $line: $msg"))))
+        Some(Result.FileError(Source.File(stripPath(filename, path)), Some(ErrorMessage(s"On line $line: $msg"))))
       case _ => None
     }
 
   }
 
-  def parseToolResult(resultFromTool: List[String], path: Path): Try[List[Result]] = {
+  private def parseToolResult(resultFromTool: List[String], path: Source.Directory): Try[List[Result]] = {
 
     val jsonParsed: Try[JsValue] = Try(Json.parse(resultFromTool.mkString))
 
@@ -194,14 +219,19 @@ object Brakeman extends Tool {
     }
   }
 
-  private[this] def getCommandFor(path: Path, conf: Option[List[PatternDef]], files: Option[Set[Path]])(implicit spec: Spec): List[String] = {
+  private[this] def getCommandFor(path: Source.Directory, conf: Option[List[Pattern.Definition]],
+                                  files: Option[Set[Source.File]], skipLibs: Boolean, noBranching: Boolean)
+                                 (implicit spec: Tool.Specification): List[String] = {
 
-    val patternsToTest = ToolHelper.getPatternsToLint(conf).map{ case patterns =>
+    val patternsToTest = ToolHelper.patternsToLint(conf).map { case patterns =>
       val patternsIds = patterns.map(p => p.patternId.value)
       List("-t", patternsIds.mkString(","))
     }.getOrElse(List.empty)
 
-    List("brakeman", "-f", "json") ++ patternsToTest ++ List(path.toString)
+    val skipLibsCmd = if(skipLibs) List("--skip-libs") else List.empty
+    val noBranchingCmd = if(noBranching) List("--no-branching") else List.empty
+
+    List("brakeman", "-f", "json") ++ skipLibsCmd ++ noBranchingCmd ++ patternsToTest ++ List(path.toString)
   }
 }
 
