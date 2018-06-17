@@ -5,7 +5,7 @@ require "json"
 
 checks = Brakeman::Checks.checks
 remediations = YAML.load_file(Brakeman::Report::CodeClimate::REMEDIATION_POINTS_CONFIG_PATH)
-directory = "vendor/bundle/ruby/2.3.0/gems/brakeman-#{Brakeman::Version}/lib/brakeman/checks/*.rb"
+directory = "src/main/ruby/codacy/brakeman/vendor/bundle/ruby/2.3.0/gems/brakeman-#{Brakeman::Version}/lib/brakeman/checks/*.rb"
 mapping = Brakeman::WarningCodes::Codes.collect { |code, value|
   next if code == :csrf_protection_disabled ||
           code == :CVE_2012_2660 ||
@@ -47,7 +47,7 @@ patterns = {
   :patterns => patterns_with_category.sort_by { |pattern| pattern[:patternId] },
 }
 
-File.open("../src/main/resources/docs/patterns.json", "w") do |f|
+File.open("src/main/resources/docs/patterns.json", "w") do |f|
   f.puts JSON.pretty_generate(patterns)
 end
 
@@ -60,7 +60,7 @@ description = checks.map { |check|
   }
 }.sort_by { |pattern| pattern[:patternId] }
 
-File.open("../src/main/resources/docs/description/description.json", "w") do |f|
+File.open("src/main/resources/docs/description/description.json", "w") do |f|
   f.puts JSON.pretty_generate(description)
 end
 

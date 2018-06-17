@@ -32,14 +32,16 @@ docker run -it -v $srcDir:/src  <DOCKER_NAME>:<DOCKER_VERSION>
 We use the [codacy-plugins-test](https://github.com/codacy/codacy-plugins-test) to test our external tools integration.
 You can follow the instructions there to make sure your tool is working as expected.
 
-## Generating documentation
+## Update Version with Docs
 
-Update brakeman version in `docs/Gemfile` and then run:
-``` bash
-cd docs
-bundle install --path vendor/bundle
-bundle exec ruby DocumentationGenerator.rb
+Change the version in `.brakeman-version` and then run on this project root:
+
+```sh
+bundle clean
+bundle install --path src/main/ruby/codacy/brakeman/vendor/bundle
+bundle exec ruby src/main/ruby/codacy/brakeman/DocumentationGenerator.rb
 ```
+
 Both `patterns.json` and `description.json` will be updated.
 Copy the output and update the Brakeman.scala `warningToPatternId` method.
 

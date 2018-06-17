@@ -39,25 +39,35 @@ toolVersion := {
   toolMap.getOrElse[String]("version", throw new Exception("Failed to retrieve 'version' from patterns.json"))
 }
 
-def installAll(toolVersion: String) =
-  s"""apk --no-cache add bash build-base ruby ruby-bundler ruby-dev &&
-     |apk add --update ca-certificates && rm -rf /var/cache/apk/* &&
-     |gem install --no-ri --no-rdoc json &&
-     |gem install --no-ri --no-rdoc brakeman:$toolVersion &&
-     |gem cleanup &&
-     |apk del build-base ruby-dev &&
-     |rm -rf /tmp/* &&
-     |rm -rf /var/cache/apk/*""".stripMargin.replaceAll(System.lineSeparator(), " ")
+val installAll =
+  s"""apk add --no-cache bash ca-certificates build-base ruby ruby-bundler ruby-dev
+     |&& echo 'gem: --no-document' > /etc/gemrc
+     |&& cd /opt/docker/setup
+     |&& bundle install
+     |&& gem cleanup
+     |&& apk del build-base ruby-bundler ruby-dev
+     |&& rm -rf /opt/docker/setup /tmp/* /var/cache/apk/*""".stripMargin
+    .replaceAll(System.lineSeparator(), " ")
 
-mappings in Universal <++= (resourceDirectory in Compile) map { (resourceDir: File) =>
-  val src = resourceDir / "docs"
-  val dest = "/docs"
+mappings in Universal ++= {
+  (resourceDirectory in Compile) map { (resourceDir: File) =>
+    val src = resourceDir / "docs"
+    val dest = "/docs"
 
-  for {
-    path <- (src ***).get
-    if !path.isDirectory
-  } yield path -> path.toString.replaceFirst(src.toString, dest)
-}
+    val docFiles = for {
+      path <- src.***.get if !path.isDirectory
+    } yield path -> path.toString.replaceFirst(src.toString, dest)
+
+    val rubyFiles = Seq(
+      (file("Gemfile"), "/setup/Gemfile"),
+      (file("Gemfile.lock"), "/setup/Gemfile.lock"),
+      (file(".ruby-version"), "/setup/.ruby-version"),
+      (file(".brakeman-version"), "/setup/.brakeman-version")
+    )
+
+    docFiles ++ rubyFiles
+  }
+}.value
 
 
 val dockerUser = "docker"
@@ -74,9 +84,8 @@ dockerCommands := {
     case cmd@(Cmd("ADD", _)) => List(
       Cmd("RUN", s"adduser -u 2004 -D $dockerUser"),
       cmd,
-      Cmd("RUN", installAll(toolVersion.value)),
       Cmd("RUN", "mv /opt/docker/docs /docs"),
-      ExecCmd("RUN", Seq("chown", "-R", s"$dockerUser:$dockerGroup", "/docs"): _*)
+      Cmd("RUN", installAll)
     )
     case other => List(other)
   }
