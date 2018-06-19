@@ -1,3 +1,4 @@
+require "bundler"
 require "brakeman"
 require "brakeman/scanner"
 require "brakeman/report/report_codeclimate"
@@ -5,7 +6,9 @@ require "json"
 
 checks = Brakeman::Checks.checks
 remediations = YAML.load_file(Brakeman::Report::CodeClimate::REMEDIATION_POINTS_CONFIG_PATH)
-directory = "src/main/ruby/codacy/brakeman/vendor/bundle/ruby/2.3.0/gems/brakeman-#{Brakeman::Version}/lib/brakeman/checks/*.rb"
+
+brakeman_gem_path = Bundler.rubygems.find_name("brakeman").first.full_gem_path
+directory = "#{brakeman_gem_path}/lib/brakeman/checks/*.rb"
 mapping = Brakeman::WarningCodes::Codes.collect { |code, value|
   next if code == :csrf_protection_disabled ||
           code == :CVE_2012_2660 ||

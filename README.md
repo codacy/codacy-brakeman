@@ -37,8 +37,7 @@ You can follow the instructions there to make sure your tool is working as expec
 Change the version in `.brakeman-version` and then run on this project root:
 
 ```sh
-bundle clean
-bundle install --path src/main/ruby/codacy/brakeman/vendor/bundle
+bundle install
 bundle exec ruby src/main/ruby/codacy/brakeman/DocumentationGenerator.rb
 ```
 
