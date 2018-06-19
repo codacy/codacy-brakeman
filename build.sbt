@@ -29,7 +29,7 @@ version in Docker := "1.0"
 
 organization := "com.codacy"
 
-lazy val toolVersion = TaskKey[String]("Retrieve the version of the underlying tool from patterns.json")
+lazy val toolVersion = TaskKey[String]("toolVersion", "Retrieve the version of the underlying tool from patterns.json")
 
 toolVersion := {
   val jsonFile = (resourceDirectory in Compile).value / "docs" / "patterns.json"
