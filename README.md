@@ -32,6 +32,18 @@ docker run -it -v $srcDir:/src  <DOCKER_NAME>:<DOCKER_VERSION>
 We use the [codacy-plugins-test](https://github.com/codacy/codacy-plugins-test) to test our external tools integration.
 You can follow the instructions there to make sure your tool is working as expected.
 
+## Update Version with Docs
+
+Change the version in `.brakeman-version` and then run on this project root:
+
+```sh
+bundle install
+bundle exec ruby src/main/ruby/codacy/brakeman/DocumentationGenerator.rb
+```
+
+Both `patterns.json` and `description.json` will be updated.
+Copy the output and update the Brakeman.scala `warningToPatternId` method.
+
 ## What is Codacy
 
 [Codacy](https://www.codacy.com/) is an Automated Code Review Tool that monitors your technical debt, helps you improve your code quality, teaches best practices to your developers, and helps you save time in Code Reviews.

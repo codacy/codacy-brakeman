@@ -80,13 +80,13 @@ object Brakeman extends Tool {
 
   private def warningToPatternId(warningCode: Int): String = {
     warningCode match {
+      // This was automatically generated. Do not change.
       case 0 => "SQL"
       case 1 => "SQL"
       case 2 => "CrossSiteScripting"
       case 3 => "LinkTo"
       case 4 => "LinkToHref"
       case 5 => "CrossSiteScripting"
-      case 6 => "ForgerySetting"
       case 7 => "ForgerySetting"
       case 8 => "SkipBeforeFilter"
       case 9 => "BasicAuth"
@@ -100,6 +100,8 @@ object Brakeman extends Tool {
       case 17 => "MassAssignment"
       case 18 => "Redirect"
       case 19 => "ModelAttributes"
+      case 20 => "ModelAttributes"
+      case 21 => "SafeBufferManipulation"
       case 22 => "SelectVulnerability"
       case 23 => "Send"
       case 24 => "UnsafeReflection"
@@ -156,6 +158,21 @@ object Brakeman extends Tool {
       case 86 => "ForgerySetting"
       case 87 => "JSONEncoding"
       case 88 => "XMLDoS"
+      case 89 => "SessionManipulation"
+      case 90 => "WeakHash"
+      case 91 => "WeakHash"
+      case 92 => "DynamicFinders"
+      case 93 => "BasicAuthTimingAttack"
+      case 94 => "MimeTypeDoS"
+      case 95 => "NestedAttributesBypass"
+      case 98 => "StripTags"
+      case 99 => "Render"
+      case 100 => "RouteDoS"
+      case 101 => "Secrets"
+      case 102 => "ContentTag"
+      case 104 => "DivideByZero"
+      case 105 => "PermitAttributes"
+      case 106 => "SanitizeMethods"
       case _ => "UnknowError"
     }
   }
