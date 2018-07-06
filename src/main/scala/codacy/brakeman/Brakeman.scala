@@ -1,17 +1,17 @@
 package codacy.brakeman
 
 import codacy.docker.api._
-import codacy.dockerApi.utils.{CommandResult, CommandRunner}
-import play.api.libs.json._
 import codacy.docker.api.utils.ToolHelper
+import codacy.dockerApi.utils.{CommandResult, CommandRunner}
+import play.api.libs.functional.syntax._
+import play.api.libs.json._
 
 import scala.util.{Failure, Success, Try}
-import play.api.libs.functional.syntax._
 
 case class WarnResult(warningCode: Int, message: String, file: String, line: JsValue)
 
 object WarnResult {
-  implicit val warnReads = (
+  implicit val warnReads: Reads[WarnResult] = (
     (__ \ "warning_code").read[Int] and
       (__ \ "message").read[String] and
       (__ \ "file").read[String] and
@@ -26,7 +26,7 @@ object Brakeman extends Tool {
   private val noBranchingKey = Configuration.Key("no_branching")
 
   private def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
-    resultFromTool.stderr.contains("Please supply the path to a Rails application.")
+    resultFromTool.stderr.contains("Please supply the path to a Rails application")
   }
 
   override def apply(path: Source.Directory, conf: Option[List[Pattern.Definition]], files: Option[Set[Source.File]],
@@ -35,13 +35,13 @@ object Brakeman extends Tool {
     def isEnabled(result: Result) = {
       result match {
         case res: Result.Issue =>
-          conf.map(_.exists {
+          conf.forall(_.exists {
             _.patternId == res.patternId
-          }).getOrElse(true) &&
-            files.map(_.exists(_.toString.endsWith(res.file.path))).getOrElse(true)
+          }) &&
+            files.forall(_.exists(_.toString.endsWith(res.file.path)))
 
         case res: Result.FileError =>
-          files.map(_.exists(_.toString.endsWith(res.file.path))).getOrElse(true)
+          files.forall(_.exists(_.toString.endsWith(res.file.path)))
 
         case _ => true
       }
@@ -240,13 +240,13 @@ object Brakeman extends Tool {
                                   files: Option[Set[Source.File]], skipLibs: Boolean, noBranching: Boolean)
                                  (implicit spec: Tool.Specification): List[String] = {
 
-    val patternsToTest = ToolHelper.patternsToLint(conf).map { case patterns =>
+    val patternsToTest = ToolHelper.patternsToLint(conf).map { patterns =>
       val patternsIds = patterns.map(p => p.patternId.value)
       List("-t", patternsIds.mkString(","))
     }.getOrElse(List.empty)
 
-    val skipLibsCmd = if(skipLibs) List("--skip-libs") else List.empty
-    val noBranchingCmd = if(noBranching) List("--no-branching") else List.empty
+    val skipLibsCmd = if (skipLibs) List("--skip-libs") else List.empty
+    val noBranchingCmd = if (noBranching) List("--no-branching") else List.empty
 
     List("brakeman", "-f", "json") ++ skipLibsCmd ++ noBranchingCmd ++ patternsToTest ++ List(path.toString)
   }
