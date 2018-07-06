@@ -5,9 +5,9 @@ import scala.util.parsing.json.JSON
 
 name := """codacy-engine-brakeman"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0.0-SNAPSHOT"
 
-val languageVersion = "2.11.7"
+val languageVersion = "2.11.12"
 
 scalaVersion := languageVersion
 
@@ -18,14 +18,14 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.4.8",
-  "com.codacy" %% "codacy-engine-scala-seed" % "2.7.9"
+  "com.codacy" %% "codacy-engine-scala-seed" % "2.7.10"
 )
 
 enablePlugins(JavaAppPackaging)
 
 enablePlugins(DockerPlugin)
 
-version in Docker := "1.0"
+version in Docker := "1.0.0-SNAPSHOT"
 
 organization := "com.codacy"
 

@@ -26,7 +26,7 @@ object Brakeman extends Tool {
   private val noBranchingKey = Configuration.Key("no_branching")
 
   private def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
-    resultFromTool.stderr.contains("Please supply the path to a Rails application")
+    resultFromTool.stderr.exists(_.contains("Please supply the path to a Rails application"))
   }
 
   override def apply(path: Source.Directory, conf: Option[List[Pattern.Definition]], files: Option[Set[Source.File]],
