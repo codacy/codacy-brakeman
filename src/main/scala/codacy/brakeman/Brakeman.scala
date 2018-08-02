@@ -1,8 +1,9 @@
 package codacy.brakeman
 
-import codacy.docker.api._
-import codacy.docker.api.utils.ToolHelper
-import codacy.dockerApi.utils.{CommandResult, CommandRunner}
+import com.codacy.plugins.api.results.{Pattern, Result, Tool}
+import com.codacy.plugins.api.{ErrorMessage, Options, Source}
+import com.codacy.tools.scala.seed.utils.ToolHelper._
+import com.codacy.tools.scala.seed.utils.{CommandResult, CommandRunner}
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
@@ -12,30 +13,33 @@ case class WarnResult(warningCode: Int, message: String, file: String, line: JsV
 
 object WarnResult {
   implicit val warnReads: Reads[WarnResult] = (
-    (__ \ "warning_code").read[Int] and
-      (__ \ "message").read[String] and
-      (__ \ "file").read[String] and
-      (__ \ "line").read[JsValue]
-    ) (WarnResult.apply _)
+    (__ \ "warning_code")
+      .read[Int]
+      .and((__ \ "message").read[String])
+      .and((__ \ "file").read[String])
+      .and((__ \ "line").read[JsValue])
+    )(WarnResult.apply _)
 }
 
 object Brakeman extends Tool {
 
-  private val skipLibsKey = Configuration.Key("skip_libs")
+  private val skipLibsKey = Options.Key("skip_libs")
 
-  private val noBranchingKey = Configuration.Key("no_branching")
+  private val noBranchingKey = Options.Key("no_branching")
 
   private def checkNonRailsProject(resultFromTool: CommandResult): Boolean = {
     resultFromTool.stderr.exists(_.contains("Please supply the path to a Rails application"))
   }
 
-  override def apply(path: Source.Directory, conf: Option[List[Pattern.Definition]], files: Option[Set[Source.File]],
-                     options: Map[Configuration.Key, Configuration.Value])(implicit specification: Tool.Specification): Try[List[Result]] = {
+  def apply(source: Source.Directory,
+            configuration: Option[List[Pattern.Definition]],
+            files: Option[Set[Source.File]],
+            options: Map[Options.Key, Options.Value])(implicit specification: Tool.Specification): Try[List[Result]] = {
 
     def isEnabled(result: Result) = {
       result match {
         case res: Result.Issue =>
-          conf.forall(_.exists {
+          configuration.forall(_.exists {
             _.patternId == res.patternId
           }) &&
             files.forall(_.exists(_.toString.endsWith(res.file.path)))
@@ -47,31 +51,32 @@ object Brakeman extends Tool {
       }
     }
 
-    val skipLibs = options.get(skipLibsKey).fold(false) {
-      value =>
-        Option(value: JsValue).collect {
+    val skipLibs = options.get(skipLibsKey).fold(false) { value =>
+      Option(value: JsValue)
+        .collect {
           case JsBoolean(enabled) => enabled
           case _ => false
-        }.getOrElse(false)
+        }
+        .getOrElse(false)
     }
 
-    val noBranching = options.get(noBranchingKey).fold(false) {
-      value =>
-        Option(value: JsValue).collect {
+    val noBranching = options.get(noBranchingKey).fold(false) { value =>
+      Option(value: JsValue)
+        .collect {
           case JsBoolean(enabled) => enabled
           case _ => false
-        }.getOrElse(false)
+        }
+        .getOrElse(false)
     }
 
-    val command = getCommandFor(path, conf, files, skipLibs, noBranching)
+    val command = getCommandFor(source, configuration, files, skipLibs, noBranching)
 
     CommandRunner.exec(command) match {
       case Right(resultFromTool) =>
         if (checkNonRailsProject(resultFromTool)) {
           Try(List.empty)
-        }
-        else {
-          val results = parseToolResult(resultFromTool.stdout, path)
+        } else {
+          val results = parseToolResult(resultFromTool.stdout, source)
           results.map(_.filter(isEnabled))
         }
       case Left(ex) => Failure(ex)
@@ -182,17 +187,16 @@ object Brakeman extends Tool {
     //In our tests we have the pattern and the error type
     lazy val defaultLineWarning = 1
 
-    warn.asOpt[WarnResult].map {
-      res =>
-        val source = Source.File(res.file)
-        val resultMessage = Result.Message(res.message)
-        val patternId = Pattern.Id(warningToPatternId(res.warningCode))
-        val line = Source.Line(res.line match {
-          case lineNumber: JsNumber => lineNumber.value.toInt
-          case _ => defaultLineWarning
-        })
+    warn.asOpt[WarnResult].map { res =>
+      val source = Source.File(res.file)
+      val resultMessage = Result.Message(res.message)
+      val patternId = Pattern.Id(warningToPatternId(res.warningCode))
+      val line = Source.Line(res.line match {
+        case lineNumber: JsNumber => lineNumber.value.toInt
+        case _ => defaultLineWarning
+      })
 
-        Result.Issue(source, resultMessage, patternId, line)
+      Result.Issue(source, resultMessage, patternId, line)
     }
 
   }
@@ -236,14 +240,18 @@ object Brakeman extends Tool {
     }
   }
 
-  private[this] def getCommandFor(path: Source.Directory, conf: Option[List[Pattern.Definition]],
-                                  files: Option[Set[Source.File]], skipLibs: Boolean, noBranching: Boolean)
-                                 (implicit spec: Tool.Specification): List[String] = {
+  private[this] def getCommandFor(path: Source.Directory,
+                                  conf: Option[List[Pattern.Definition]],
+                                  files: Option[Set[Source.File]],
+                                  skipLibs: Boolean,
+                                  noBranching: Boolean)(implicit spec: Tool.Specification): List[String] = {
 
-    val patternsToTest = ToolHelper.patternsToLint(conf).map { patterns =>
-      val patternsIds = patterns.map(p => p.patternId.value)
-      List("-t", patternsIds.mkString(","))
-    }.getOrElse(List.empty)
+    val patternsToTest = conf.withDefaultParameters
+      .map { patterns =>
+        val patternsIds = patterns.map(p => p.patternId.value)
+        List("-t", patternsIds.mkString(","))
+      }
+      .getOrElse(List.empty)
 
     val skipLibsCmd = if (skipLibs) List("--skip-libs") else List.empty
     val noBranchingCmd = if (noBranching) List("--no-branching") else List.empty

@@ -1,6 +1,6 @@
 package codacy
 
-import codacy.dockerApi.DockerEngine
 import codacy.brakeman.Brakeman
+import com.codacy.tools.scala.seed.DockerEngine
 
-object Engine extends DockerEngine(Brakeman)
+object Engine extends DockerEngine(Brakeman)()
