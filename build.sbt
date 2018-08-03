@@ -1,13 +1,10 @@
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
-import scala.io.Source
-import scala.util.parsing.json.JSON
-
-name := """codacy-engine-brakeman"""
+name := "codacy-engine-brakeman"
 
 version := "1.0.0-SNAPSHOT"
 
-val languageVersion = "2.11.12"
+val languageVersion = "2.12.6"
 
 scalaVersion := languageVersion
 
@@ -17,8 +14,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play-json" % "2.4.8",
-  "com.codacy" %% "codacy-engine-scala-seed" % "2.7.10"
+  "com.codacy" %% "codacy-engine-scala-seed" % "3.0.183"
 )
 
 enablePlugins(JavaAppPackaging)
@@ -29,14 +25,19 @@ version in Docker := "1.0.0-SNAPSHOT"
 
 organization := "com.codacy"
 
-lazy val toolVersion = TaskKey[String]("toolVersion", "Retrieve the version of the underlying tool from patterns.json")
-
+lazy val toolVersion = taskKey[String]("Retrieve the version of the underlying tool from patterns.json")
 toolVersion := {
-  val jsonFile = (resourceDirectory in Compile).value / "docs" / "patterns.json"
-  val toolMap = JSON.parseFull(Source.fromFile(jsonFile).getLines().mkString)
-    .getOrElse(throw new Exception("patterns.json is not a valid json"))
-    .asInstanceOf[Map[String, String]]
-  toolMap.getOrElse[String]("version", throw new Exception("Failed to retrieve 'version' from patterns.json"))
+  import better.files.File
+  import play.api.libs.json.{JsString, JsValue, Json}
+
+  val jsonFile = resourceDirectory.in(Compile).value / "docs" / "patterns.json"
+  val patternsJsonValues = Json.parse(File(jsonFile.toPath).contentAsString).as[Map[String, JsValue]]
+
+  patternsJsonValues
+    .collectFirst {
+      case ("version", JsString(version)) => version
+    }
+    .getOrElse(throw new Exception("Failed to retrieve version from docs/patterns.json"))
 }
 
 val installAll =
@@ -49,14 +50,16 @@ val installAll =
      |&& rm -rf /opt/docker/setup /tmp/* /var/cache/apk/*""".stripMargin
     .replaceAll(System.lineSeparator(), " ")
 
-mappings in Universal ++= {
-  (resourceDirectory in Compile) map { (resourceDir: File) =>
+mappings.in(Universal) ++= resourceDirectory
+  .in(Compile)
+  .map { resourceDir: File =>
     val src = resourceDir / "docs"
     val dest = "/docs"
 
-    val docFiles = for {
-      path <- src.***.get if !path.isDirectory
-    } yield path -> path.toString.replaceFirst(src.toString, dest)
+    val docFiles = (for {
+      path <- better.files.File(src.toPath).listRecursively()
+      if !path.isDirectory
+    } yield path.toJava -> path.toString.replaceFirst(src.toString, dest)).toSeq
 
     val rubyFiles = Seq(
       (file("Gemfile"), "/setup/Gemfile"),
@@ -67,7 +70,7 @@ mappings in Universal ++= {
 
     docFiles ++ rubyFiles
   }
-}.value
+  .value
 
 
 val dockerUser = "docker"
