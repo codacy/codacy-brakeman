@@ -1,0 +1,3 @@
+src/main/resources/docs/multiple-tests/with-config/src/* linguist-generated=true
+src/main/resources/docs/multiple-tests/without-config/src/* linguist-generated=true
+src/main/resources/docs/multiple-tests/with-tool-properties/src/* linguist-generated=true
