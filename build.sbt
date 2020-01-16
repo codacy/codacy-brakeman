@@ -1,21 +1,13 @@
-import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
+import com.typesafe.sbt.packager.docker.{Cmd}
 
-name := "codacy-engine-brakeman"
+name := "codacy-brakeman"
 
 version := "1.0.0-SNAPSHOT"
 
-val languageVersion = "2.12.6"
+scalaVersion := "2.13.1"
 
-scalaVersion := languageVersion
-
-resolvers ++= Seq(
-  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/releases",
-  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
-)
-
-libraryDependencies ++= Seq(
-  "com.codacy" %% "codacy-engine-scala-seed" % "3.0.183"
-)
+libraryDependencies ++= Seq("com.typesafe.play" %% "play-json" % "2.8.1",
+                            "com.codacy" %% "codacy-engine-scala-seed" % "3.1.0")
 
 enablePlugins(JavaAppPackaging)
 
@@ -56,22 +48,18 @@ mappings.in(Universal) ++= resourceDirectory
     val src = resourceDir / "docs"
     val dest = "/docs"
 
-    val docFiles = (for {
-      path <- better.files.File(src.toPath).listRecursively()
-      if !path.isDirectory
-    } yield path.toJava -> path.toString.replaceFirst(src.toString, dest)).toSeq
+    val docFiles = for {
+      path <- src.allPaths.get if !path.isDirectory
+    } yield path -> path.toString.replaceFirst(src.toString, dest)
 
-    val rubyFiles = Seq(
-      (file("Gemfile"), "/setup/Gemfile"),
-      (file("Gemfile.lock"), "/setup/Gemfile.lock"),
-      (file(".ruby-version"), "/setup/.ruby-version"),
-      (file(".brakeman-version"), "/setup/.brakeman-version")
-    )
+    val rubyFiles = Seq((file("Gemfile"), "/setup/Gemfile"),
+                        (file("Gemfile.lock"), "/setup/Gemfile.lock"),
+                        (file(".ruby-version"), "/setup/.ruby-version"),
+                        (file(".brakeman-version"), "/setup/.brakeman-version"))
 
     docFiles ++ rubyFiles
   }
   .value
-
 
 val dockerUser = "docker"
 val dockerGroup = "docker"
@@ -84,12 +72,11 @@ dockerBaseImage := "openjdk:8-jre-alpine"
 
 dockerCommands := {
   dockerCommands.dependsOn(toolVersion).value.flatMap {
-    case cmd@(Cmd("ADD", _)) => List(
-      Cmd("RUN", s"adduser -u 2004 -D $dockerUser"),
-      cmd,
-      Cmd("RUN", "mv /opt/docker/docs /docs"),
-      Cmd("RUN", installAll)
-    )
+    case cmd @ (Cmd("ADD", _)) =>
+      List(Cmd("RUN", s"adduser -u 2004 -D $dockerUser"),
+           cmd,
+           Cmd("RUN", "mv /opt/docker/docs /docs"),
+           Cmd("RUN", installAll))
     case other => List(other)
   }
 }

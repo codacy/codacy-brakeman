@@ -61,3 +61,4 @@ build-iPhoneSimulator/
 .rvmrc
 
 src/main/ruby/codacy/brakeman/vendor
+.metals

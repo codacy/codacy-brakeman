@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<checkstyle version="4.3">
+    <file name="friendly_controller.rb">
+        <error source="MassAssignment" line="34" message="Parameters should be whitelisted for mass assignment" severity="warning" />
+        <error source="MassAssignment" line="41" message="Parameters should be whitelisted for mass assignment" severity="warning" />
+        <error source="MassAssignment" line="48" message="Parameters should be whitelisted for mass assignment" severity="warning" />
+        <error source="MassAssignment" line="27" message="Parameters should be whitelisted for mass assignment" severity="warning" />
+    </file>
+</checkstyle>
