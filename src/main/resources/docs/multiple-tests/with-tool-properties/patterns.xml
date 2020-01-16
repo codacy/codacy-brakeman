@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<module name="root">
+    <property name="skip_libs" value="true" />
+    <property name="no_branching" value="false" />
+</module>
