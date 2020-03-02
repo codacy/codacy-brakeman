@@ -53,9 +53,7 @@ mappings.in(Universal) ++= resourceDirectory
     } yield path -> path.toString.replaceFirst(src.toString, dest)
 
     val rubyFiles = Seq((file("Gemfile"), "/setup/Gemfile"),
-                        (file("Gemfile.lock"), "/setup/Gemfile.lock"),
-                        (file(".ruby-version"), "/setup/.ruby-version"),
-                        (file(".brakeman-version"), "/setup/.brakeman-version"))
+                        (file("Gemfile.lock"), "/setup/Gemfile.lock"))
 
     docFiles ++ rubyFiles
   }
