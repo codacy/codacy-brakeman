@@ -3,6 +3,7 @@ require "brakeman"
 require "brakeman/scanner"
 require "brakeman/report/report_codeclimate"
 require "json"
+require_relative 'SecuritySubcategory'
 
 checks = Brakeman::Checks.checks
 remediations = YAML.load_file(Brakeman::Report::CodeClimate::REMEDIATION_POINTS_CONFIG_PATH)
@@ -36,18 +37,10 @@ mapping = Brakeman::WarningCodes::Codes.collect { |code, value|
   }
 }.compact.sort_by { |pattern| pattern[:value] }
 
-def read_subcategories_file
-  file = File.read("src/main/ruby/codacy/brakeman/subcategories.json")
-  JSON.parse(file)
-end
-
-def pattern_subcategory(name)
-  subCategoriesJson = read_subcategories_file
-  subCategories = subCategoriesJson.keys
-  
-  subCategories.select { |subcategory| 
-    subCategoriesJson[subcategory].include?(name) 
-  }.first
+def pattern_subcategory(name)  
+  SecuritySubcategory::Mapping.select { |subcategory|
+    SecuritySubcategory::Mapping[subcategory].include?(name)
+  }.keys.first
 end
 
 patterns_with_category = checks.map { |check|
