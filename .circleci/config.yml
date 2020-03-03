@@ -40,4 +40,4 @@ workflows:
           name: tag_version
           context: CodacyAWS
           requires:
-            - publish_dockerhub
+            - codacy/publish_docker
