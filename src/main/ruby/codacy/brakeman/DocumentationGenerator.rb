@@ -3,6 +3,7 @@ require "brakeman"
 require "brakeman/scanner"
 require "brakeman/report/report_codeclimate"
 require "json"
+require_relative 'SecuritySubcategory'
 
 checks = Brakeman::Checks.checks
 remediations = YAML.load_file(Brakeman::Report::CodeClimate::REMEDIATION_POINTS_CONFIG_PATH)
@@ -36,12 +37,20 @@ mapping = Brakeman::WarningCodes::Codes.collect { |code, value|
   }
 }.compact.sort_by { |pattern| pattern[:value] }
 
+def pattern_subcategory(name)  
+  SecuritySubcategory::Mapping.select { |subcategory|
+    SecuritySubcategory::Mapping[subcategory].include?(name)
+  }.keys.first
+end
+
 patterns_with_category = checks.map { |check|
+  patternId = check.name.sub("Check", "")
   {
-    :patternId => check.name.sub("Check", ""),
+    :patternId => patternId,
     :level => "Warning",
     :category => "Security",
-  }
+    :subcategory => pattern_subcategory(patternId)
+  }.delete_if { |_, value| value.nil? }
 }
 
 patterns = {

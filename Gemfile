@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'brakeman', File.read('.brakeman-version')
-gem "json", "~> 2.1"
+gem "brakeman", "4.3.1"
+gem "json", "2.3.0"

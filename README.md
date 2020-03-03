@@ -12,6 +12,7 @@ Check the **Docs** section for more information.
 You can create the docker by doing:
 
 ```bash
+docker build -t codacy-brakeman-base .
 sbt docker:publishLocal
 ```
 
@@ -34,9 +35,8 @@ You can follow the instructions there to make sure your tool is working as expec
 
 ## Update Version with Docs
 
-Change the version in `.brakeman-version` and then run on this project root:
-
 ```sh
+bundle update
 bundle install
 bundle exec ruby src/main/ruby/codacy/brakeman/DocumentationGenerator.rb
 ```
@@ -50,11 +50,11 @@ Copy the output and update the Brakeman.scala `warningToPatternId` method.
 
 ### Among Codacy’s features
 
-- Identify new Static Analysis issues
-- Commit and Pull Request Analysis with GitHub, BitBucket/Stash, GitLab (and also direct git repositories)
-- Auto-comments on Commits and Pull Requests
-- Integrations with Slack, HipChat, Jira, YouTrack
-- Track issues in Code Style, Security, Error Proneness, Performance, Unused Code and other categories
+-   Identify new Static Analysis issues
+-   Commit and Pull Request Analysis with GitHub, BitBucket/Stash, GitLab (and also direct git repositories)
+-   Auto-comments on Commits and Pull Requests
+-   Integrations with Slack, HipChat, Jira, YouTrack
+-   Track issues in Code Style, Security, Error Proneness, Performance, Unused Code and other categories
 
 Codacy also helps keep track of Code Coverage, Code Duplication, and Code Complexity.
 

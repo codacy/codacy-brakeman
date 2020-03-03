@@ -5,47 +5,56 @@
     {
       "patternId": "BasicAuth",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Auth"
     },
     {
       "patternId": "BasicAuthTimingAttack",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Auth"
     },
     {
       "patternId": "ContentTag",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Other"
     },
     {
       "patternId": "CreateWith",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "CrossSiteScripting",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "DefaultRoutes",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Routes"
     },
     {
       "patternId": "Deserialize",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "DetailedExceptions",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Other"
     },
     {
       "patternId": "DigestDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "DivideByZero",
@@ -60,107 +69,128 @@
     {
       "patternId": "EscapeFunction",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Regex"
     },
     {
       "patternId": "Evaluation",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "Execute",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "FileAccess",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "FileAccess"
     },
     {
       "patternId": "FileDisclosure",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "FileAccess"
     },
     {
       "patternId": "FilterSkipping",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Auth"
     },
     {
       "patternId": "ForgerySetting",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "CSRF"
     },
     {
       "patternId": "HeaderDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "I18nXSS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "JRubyXML",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "JSONEncoding",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "JSONParsing",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "LinkTo",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "LinkToHref",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "MassAssignment"
     },
     {
       "patternId": "MailTo",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "MassAssignment",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "MassAssignment"
     },
     {
       "patternId": "MimeTypeDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "ModelAttrAccessible",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "MassAssignment"
     },
     {
       "patternId": "ModelAttributes",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "ModelSerialize",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "NestedAttributes",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "NestedAttributesBypass",
@@ -180,67 +210,80 @@
     {
       "patternId": "QuoteTableName",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "SQLInjection"
     },
     {
       "patternId": "Redirect",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "RegexDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Regex"
     },
     {
       "patternId": "Render",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "FileAccess"
     },
     {
       "patternId": "RenderDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "RenderInline",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "ResponseSplitting",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "HTTP"
     },
     {
       "patternId": "RouteDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "SQL",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "SQLInjection"
     },
     {
       "patternId": "SQLCVEs",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "SQLInjection"
     },
     {
       "patternId": "SSLVerify",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "SSL"
     },
     {
       "patternId": "SafeBufferManipulation",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "SanitizeMethods",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "Secrets",
@@ -250,102 +293,122 @@
     {
       "patternId": "SelectTag",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "SelectVulnerability",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "SQLInjection"
     },
     {
       "patternId": "Send",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "SendFile",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "UnexpectedBehaviour"
     },
     {
       "patternId": "SessionManipulation",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Auth"
     },
     {
       "patternId": "SessionSettings",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Cookies"
     },
     {
       "patternId": "SimpleFormat",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "SingleQuotes",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "SkipBeforeFilter",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "CSRF"
     },
     {
       "patternId": "StripTags",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "SymbolDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "SymbolDoSCVE",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "TranslateBug",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "XSS"
     },
     {
       "patternId": "UnsafeReflection",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "UnscopedFind",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Other"
     },
     {
       "patternId": "ValidationRegex",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     },
     {
       "patternId": "WeakHash",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "Cryptography"
     },
     {
       "patternId": "WithoutProtection",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "MassAssignment"
     },
     {
       "patternId": "XMLDoS",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "DoS"
     },
     {
       "patternId": "YAMLParsing",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "subcategory": "InputValidation"
     }
   ]
 }

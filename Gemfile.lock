@@ -2,14 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     brakeman (4.3.1)
-    json (2.1.0)
+    json (2.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   brakeman (= 4.3.1)
-  json (~> 2.1)
+  json (= 2.3.0)
 
 BUNDLED WITH
-   1.16.2
+   2.1.4
