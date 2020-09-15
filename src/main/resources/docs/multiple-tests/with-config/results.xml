@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <checkstyle version="4.3">
-    <file name="friendly_controller.rb">
+    <file name="app/controllers/friendly_controller.rb">
         <error source="SQL" line="19" message="Possible SQL injection" severity="warning" />
         <error source="Redirect" line="74" message="Possible unprotected redirect" severity="warning" />
         <error source="MassAssignment" line="34" message="Parameters should be whitelisted for mass assignment" severity="warning" />
@@ -13,13 +13,13 @@
         <error source="MassAssignment" line="27" message="Parameters should be whitelisted for mass assignment" severity="warning" />
         <error source="SQL" line="21" message="Possible SQL injection" severity="warning" />
     </file>
-    <file name="index.html.erb">
+    <file name="app/views/users/index.html.erb">
         <error source="CrossSiteScripting" line="17" message="Unescaped parameter value" severity="warning" />
         <error source="NumberToCurrency" line="9" message="Format options in number_to_currency are not safe in Rails 4.0.0" severity="warning" />
         <error source="NumberToCurrency" line="13" message="Format options in number_to_percentage are not safe in Rails 4.0.0" severity="warning" />
     </file>
 
-    <file name="production.rb">
+    <file name="config/environments/production.rb">
         <error source="DetailedExceptions" line="1" message="Detailed exceptions are enabled in production" severity="warning" />
     </file>
 
@@ -36,7 +36,7 @@
         <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-3483). Upgrade to 4.0.7" severity="info" />
     </file>
 
-    <file name="another_controller.rb">
+    <file name="app/controllers/another_controller.rb">
         <error source="RegexDoS" line="46" message="Parameter value used in regex" severity="warning" />
         <error source="Evaluation" line="8" message="User input in eval" severity="warning" />
         <error source="SQL" line="59" message="Possible SQL injection" severity="warning" />
@@ -49,7 +49,7 @@
         <error source="RenderInline" line="35" message="Unescaped parameter value rendered inline" severity="warning" />
     </file>
 
-    <file name="users_controller.rb">
+    <file name="app/controllers/users_controller.rb">
         <error source="FileAccess" line="90" message="Parameter value used in file name" severity="warning" />
         <error source="FileAccess" line="92" message="Parameter value used in file name" severity="warning" />
         <error source="SkipBeforeFilter" line="13" message="Use whitelist (:only => [..]) when skipping CSRF check" severity="warning" />
@@ -68,17 +68,17 @@
         <error source="Execute" line="88" message="Possible command injection in open()" severity="warning" />
         <error source="FileAccess" line="88" message="Parameter value used in file name" severity="warning" />
     </file>
-    <file name="various_xss.html.erb">
+    <file name="app/views/another/various_xss.html.erb">
         <error source="CrossSiteScripting" line="5" message="Unescaped parameter value" severity="warning" />
     </file>
-    <file name="application_controller.rb">
+    <file name="app/controllers/application_controller.rb">
         <error source="SSLVerify" line="26" message="SSL certificate verification was bypassed" severity="warning" />
         <error source="DetailedExceptions" line="7" message="Detailed exceptions may be enabled in 'show_detailed_exceptions?'" severity="warning" />
     </file>
-    <file name="secret_token.rb">
+    <file name="config/initializers/secret_token.rb">
         <error source="SessionSettings" line="14" message="Session secret should not be included in version control" severity="warning" />
     </file>
-    <file name="account.rb">
+    <file name="app/models/account.rb">
         <error source="SQL" line="42" message="Possible SQL injection" severity="warning" />
         <error source="SQL" line="11" message="Possible SQL injection" severity="warning" />
         <error source="SQL" line="8" message="Possible SQL injection" severity="warning" />
@@ -87,25 +87,25 @@
         <error source="SQL" line="15" message="Possible SQL injection" severity="warning" />
     </file>
 
-    <file name="user.rb">
+    <file name="app/models/user.rb">
         <error source="SymbolDoS" line="13" message="Symbol conversion from unsafe string (model attribute)" severity="warning" />
         <error source="SQL" line="6" message="Possible SQL injection" severity="warning" />
     </file>
-    <file name="sweet_lib.rb">
+    <file name="lib/sweet_lib.rb">
         <error source="Execute" line="11" message="Possible command injection" severity="warning" />
         <error source="Execute" line="5" message="Possible command injection" severity="warning" />
         <error source="SSLVerify" line="15" message="SSL certificate verification was bypassed" severity="warning" />
     </file>
-    <file name="html_safe_is_not.html.erb">
+    <file name="app/views/another/html_safe_is_not.html.erb">
         <error source="CrossSiteScripting" line="1" message="Unescaped parameter value" severity="warning" />
     </file>
-    <file name="email.rb">
+    <file name="app/models/email.rb">
         <error source="ValidationRegex" line="10" message="Insufficient validation for 'email' using /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/. Use \A and \z as anchors" severity="warning" />
     </file>
-    <file name="routes.rb">
+    <file name="config/routes.rb">
         <error source="DefaultRoutes" line="1" message="Rails 4.0.0 with globbing routes is vulnerable to directory traversal and remote code execution. Patch or upgrade to 4.0.5" severity="warning" />
     </file>
-    <file name="haml_test.html.haml">
+    <file name="app/views/users/haml_test.html.haml">
         <error source="CrossSiteScripting" line="5" message="Unescaped parameter value" severity="warning" />
     </file>
 </checkstyle>

@@ -5,6 +5,66 @@ require "brakeman/report/report_codeclimate"
 require "json"
 require_relative 'SecuritySubcategory'
 
+default_patterns = [
+  "Deserialize",
+  "YAMLParsing",
+  "RenderDoS",
+  "SessionSettings",
+  "RenderInline",
+  "SimpleFormat",
+  "ResponseSplitting",
+  "ContentTag",
+  "EscapeFunction",
+  "FileDisclosure",
+  "MailTo",
+  "CrossSiteScripting",
+  "FileAccess",
+  "FilterSkipping",
+  "Redirect",
+  "RegexDoS",
+  "ForgerySetting",
+  "DefaultRoutes",
+  "SQL",
+  "I18nXSS",
+  "Execute",
+  "JSONParsing",
+  "MassAssignment",
+  "SSLVerify",
+  "SymbolDoS",
+  "WithoutProtection",
+  "DetailedExceptions",
+  "HeaderDoS",
+  "JRubyXML",
+  "ModelAttrAccessible",
+  "JSONEncoding",
+  "QuoteTableName",
+  "CreateWith",
+  "BasicAuth",
+  "LinkToHref",
+  "Send",
+  "LinkTo",
+  "XMLDoS",
+  "DigestDoS",
+  "Evaluation",
+  "ModelAttributes",
+  "ModelSerialize",
+  "NestedAttributes",
+  "Render",
+  "SQLCVEs",
+  "SafeBufferManipulation",
+  "SanitizeMethods",
+  "SelectTag",
+  "SelectVulnerability",
+  "SingleQuotes",
+  "SkipBeforeFilter",
+  "StripTags",
+  "SymbolDoSCVE",
+  "TranslateBug",
+  "UnsafeReflection",
+  "UnscopedFind",
+  "ValidationRegex"
+]
+
 checks = Brakeman::Checks.checks
 remediations = YAML.load_file(Brakeman::Report::CodeClimate::REMEDIATION_POINTS_CONFIG_PATH)
 
@@ -49,7 +109,8 @@ patterns_with_category = checks.map { |check|
     :patternId => patternId,
     :level => "Warning",
     :category => "Security",
-    :subcategory => pattern_subcategory(patternId)
+    :subcategory => pattern_subcategory(patternId),
+    :enabled => default_patterns.include?(patternId),
   }.delete_if { |_, value| value.nil? }
 }
 

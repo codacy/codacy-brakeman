@@ -7,7 +7,7 @@ version := "1.0.0-SNAPSHOT"
 scalaVersion := "2.13.1"
 
 libraryDependencies ++= Seq("com.typesafe.play" %% "play-json" % "2.8.1",
-                            "com.codacy" %% "codacy-engine-scala-seed" % "4.0.0")
+                            "com.codacy" %% "codacy-engine-scala-seed" % "5.0.0")
 
 enablePlugins(JavaAppPackaging)
 
