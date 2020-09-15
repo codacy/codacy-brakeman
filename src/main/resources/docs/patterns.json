@@ -6,409 +6,478 @@
       "patternId": "BasicAuth",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Auth"
+      "subcategory": "Auth",
+      "enabled": true
     },
     {
       "patternId": "BasicAuthTimingAttack",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Auth"
+      "subcategory": "Auth",
+      "enabled": false
     },
     {
       "patternId": "ContentTag",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "enabled": true
     },
     {
       "patternId": "CreateWith",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "CrossSiteScripting",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "DefaultRoutes",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Routes"
+      "subcategory": "Routes",
+      "enabled": true
     },
     {
       "patternId": "Deserialize",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "DetailedExceptions",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "enabled": true
     },
     {
       "patternId": "DigestDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "DivideByZero",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "DynamicFinders",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "EscapeFunction",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Regex"
+      "subcategory": "Regex",
+      "enabled": true
     },
     {
       "patternId": "Evaluation",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "Execute",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "FileAccess",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "FileAccess"
+      "subcategory": "FileAccess",
+      "enabled": true
     },
     {
       "patternId": "FileDisclosure",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "FileAccess"
+      "subcategory": "FileAccess",
+      "enabled": true
     },
     {
       "patternId": "FilterSkipping",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Auth"
+      "subcategory": "Auth",
+      "enabled": true
     },
     {
       "patternId": "ForgerySetting",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "CSRF"
+      "subcategory": "CSRF",
+      "enabled": true
     },
     {
       "patternId": "HeaderDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "I18nXSS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "JRubyXML",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "JSONEncoding",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "JSONParsing",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "LinkTo",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "LinkToHref",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "MassAssignment"
+      "subcategory": "MassAssignment",
+      "enabled": true
     },
     {
       "patternId": "MailTo",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "MassAssignment",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "MassAssignment"
+      "subcategory": "MassAssignment",
+      "enabled": true
     },
     {
       "patternId": "MimeTypeDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": false
     },
     {
       "patternId": "ModelAttrAccessible",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "MassAssignment"
+      "subcategory": "MassAssignment",
+      "enabled": true
     },
     {
       "patternId": "ModelAttributes",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "ModelSerialize",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "NestedAttributes",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "NestedAttributesBypass",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "NumberToCurrency",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "PermitAttributes",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "QuoteTableName",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "SQLInjection"
+      "subcategory": "SQLInjection",
+      "enabled": true
     },
     {
       "patternId": "Redirect",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "RegexDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Regex"
+      "subcategory": "Regex",
+      "enabled": true
     },
     {
       "patternId": "Render",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "FileAccess"
+      "subcategory": "FileAccess",
+      "enabled": true
     },
     {
       "patternId": "RenderDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "RenderInline",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "ResponseSplitting",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "HTTP"
+      "subcategory": "HTTP",
+      "enabled": true
     },
     {
       "patternId": "RouteDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": false
     },
     {
       "patternId": "SQL",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "SQLInjection"
+      "subcategory": "SQLInjection",
+      "enabled": true
     },
     {
       "patternId": "SQLCVEs",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "SQLInjection"
+      "subcategory": "SQLInjection",
+      "enabled": true
     },
     {
       "patternId": "SSLVerify",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "SSL"
+      "subcategory": "SSL",
+      "enabled": true
     },
     {
       "patternId": "SafeBufferManipulation",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "SanitizeMethods",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "Secrets",
       "level": "Warning",
-      "category": "Security"
+      "category": "Security",
+      "enabled": false
     },
     {
       "patternId": "SelectTag",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "SelectVulnerability",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "SQLInjection"
+      "subcategory": "SQLInjection",
+      "enabled": true
     },
     {
       "patternId": "Send",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "SendFile",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "UnexpectedBehaviour"
+      "subcategory": "UnexpectedBehaviour",
+      "enabled": false
     },
     {
       "patternId": "SessionManipulation",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Auth"
+      "subcategory": "Auth",
+      "enabled": false
     },
     {
       "patternId": "SessionSettings",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Cookies"
+      "subcategory": "Cookies",
+      "enabled": true
     },
     {
       "patternId": "SimpleFormat",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "SingleQuotes",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "SkipBeforeFilter",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "CSRF"
+      "subcategory": "CSRF",
+      "enabled": true
     },
     {
       "patternId": "StripTags",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "SymbolDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "SymbolDoSCVE",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "TranslateBug",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "XSS"
+      "subcategory": "XSS",
+      "enabled": true
     },
     {
       "patternId": "UnsafeReflection",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "UnscopedFind",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "enabled": true
     },
     {
       "patternId": "ValidationRegex",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     },
     {
       "patternId": "WeakHash",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "Cryptography"
+      "subcategory": "Cryptography",
+      "enabled": false
     },
     {
       "patternId": "WithoutProtection",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "MassAssignment"
+      "subcategory": "MassAssignment",
+      "enabled": true
     },
     {
       "patternId": "XMLDoS",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "DoS"
+      "subcategory": "DoS",
+      "enabled": true
     },
     {
       "patternId": "YAMLParsing",
       "level": "Warning",
       "category": "Security",
-      "subcategory": "InputValidation"
+      "subcategory": "InputValidation",
+      "enabled": true
     }
   ]
 }
