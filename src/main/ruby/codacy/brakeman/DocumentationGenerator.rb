@@ -83,7 +83,9 @@ mapping = Brakeman::WarningCodes::Codes.collect { |code, value|
           code == :CVE_2015_7578 ||
           code == :CVE_2015_7580 ||
           code == :CVE_2016_6317 ||
-          code == :CVE_2018_3741
+          code == :CVE_2018_3741 ||
+          code == :custom_check
+
   file = Dir[directory].find { |file| File.read(file).include?(":#{code},") } ||
          Dir[directory].find { |file| File.read(file).include?(code.to_s) }
   check = checks
