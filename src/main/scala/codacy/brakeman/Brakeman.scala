@@ -178,18 +178,6 @@ object Brakeman extends Tool {
       case 104 => "DivideByZero"
       case 105 => "PermitAttributes"
       case 106 => "SanitizeMethods"
-      case 108 => "SprocketsPathTraversal"
-      case 109 => "ForceSSL"
-      case 110 => "CookieSerialization"
-      case 111 => "ReverseTabnabbing"
-      case 112 => "MassAssignment"
-      case 113 => "JSONEntityEscape"
-      case 114 => "JSONEntityEscape"
-      case 115 => "PageCachingCVE"
-      case 116 => "CSRFTokenForgeryCVE"
-      case 117 => "TemplateInjection"
-      case 118 => "VerbConfusion"
-      case 119 => "UnsafeReflectionMethods"
       case _ => "UnknowError"
     }
   }
