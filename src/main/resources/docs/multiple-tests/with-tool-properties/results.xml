@@ -3,43 +3,41 @@
     <file name="app/controllers/friendly_controller.rb">
         <error source="SQL" line="19" message="Possible SQL injection" severity="warning" />
         <error source="Redirect" line="74" message="Possible unprotected redirect" severity="warning" />
-        <error source="MassAssignment" line="34" message="Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys" severity="warning" />
-        <error source="MassAssignment" line="41" message="Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys" severity="warning" />
+        <error source="MassAssignment" line="34" message="Parameters should be whitelisted for mass assignment" severity="warning" />
+        <error source="MassAssignment" line="41" message="Parameters should be whitelisted for mass assignment" severity="warning" />
         <error source="SQL" line="64" message="Possible SQL injection" severity="warning" />
         <error source="Send" line="85" message="User controlled method execution" severity="warning" />
-        <error source="MassAssignment" line="48" message="Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys" severity="warning" />
+        <error source="MassAssignment" line="48" message="Parameters should be whitelisted for mass assignment" severity="warning" />
         <error source="SQL" line="55" message="Possible SQL injection" severity="warning" />
         <error source="SQL" line="80" message="Possible SQL injection" severity="warning" />
-        <error source="MassAssignment" line="27" message="Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys" severity="warning" />
+        <error source="MassAssignment" line="27" message="Parameters should be whitelisted for mass assignment" severity="warning" />
         <error source="SQL" line="21" message="Possible SQL injection" severity="warning" />
     </file>
     <file name="app/views/users/index.html.erb">
         <error source="CrossSiteScripting" line="17" message="Unescaped parameter value" severity="warning" />
-        <error source="NumberToCurrency" line="9" message="Format options in `number_to_currency` are not safe in Rails 4.0.0" severity="warning" />
-        <error source="NumberToCurrency" line="13" message="Format options in `number_to_percentage` are not safe in Rails 4.0.0" severity="warning" />
+        <error source="NumberToCurrency" line="9" message="Format options in number_to_currency are not safe in Rails 4.0.0" severity="warning" />
+        <error source="NumberToCurrency" line="13" message="Format options in number_to_percentage are not safe in Rails 4.0.0" severity="warning" />
     </file>
 
     <file name="config/environments/production.rb">
         <error source="DetailedExceptions" line="1" message="Detailed exceptions are enabled in production" severity="warning" />
-        <error source="ForceSSL" line="1" message="The application does not force use of HTTPS: `config.force_ssl` is not enabled" severity="warning" />
     </file>
 
     <file name="Gemfile">
-        <error source="SQLCVEs" line="6" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-0080) with PostgreSQL. Upgrade to Rails 4.0.3" severity="warning" />
-        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2013-6417). Upgrade to Rails 4.0.2" severity="info" />
-        <error source="XMLDoS" line="4" message="Rails 4.0.0 is vulnerable to denial of service via XML parsing (CVE-2015-3227). Upgrade to Rails 4.2.2" severity="warning" />
-        <error source="MimeTypeDoS" line="4" message="Rails 4.0.0 is vulnerable to denial of service via mime type caching (CVE-2016-0751). Upgrade to Rails 4.1.14.1" severity="warning" />
-        <error source="HeaderDoS" line="4" message="Rails 4.0.0 has a denial of service vulnerability (CVE-2013-6414). Upgrade to Rails 4.0.2" severity="warning" />
-        <error source="FileDisclosure" line="4" message="Rails 4.0.0 has a file existence disclosure vulnerability. Upgrade to Rails 4.0.12 or disable serving static assets" severity="warning" />
-        <error source="SimpleFormat" line="4" message="Rails 4.0.0 has a vulnerability in `simple_format` (CVE-2013-6416). Upgrade to Rails 4.0.2" severity="warning" />
-        <error source="ContentTag" line="4" message="Rails 4.0.0 `content_tag` does not escape double quotes in attribute values (CVE-2016-6316). Upgrade to Rails 4.2.7.1" severity="warning" />
-        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-3482). Upgrade to Rails 4.0.7" severity="info" />
-        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-3483). Upgrade to Rails 4.0.7" severity="info" />
-        <error source="CSRFTokenForgeryCVE" line="4" message="Rails 4.0.0 has a vulnerability that may allow CSRF token forgery. Upgrade to Rails 5.2.4.3 or patch" severity="warning" />
+        <error source="SQLCVEs" line="6" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-0080) with PostgreSQL. Upgrade to 4.0.3" severity="warning" />
+        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-3482). Upgrade to 4.0.7" severity="info" />
+        <error source="XMLDoS" line="4" message="Rails 4.0.0 is vulnerable to denial of service via XML parsing (CVE-2015-3227). Upgrade to Rails version 4.2.2" severity="warning" />
+        <error source="MimeTypeDoS" line="4" message="Rails 4.0.0 is vulnerable to denial of service via mime type caching (CVE-2016-0751). Upgrade to Rails version 4.1.14.1" severity="warning" />
+        <error source="HeaderDoS" line="4" message="Rails 4.0.0 has a denial of service vulnerability (CVE-2013-6414). Upgrade to Rails version 4.0.2" severity="warning" />
+        <error source="FileDisclosure" line="4" message="Rails 4.0.0 has a file existence disclosure. Upgrade to 4.0.12 or disable serving static assets" severity="warning" />
+        <error source="SimpleFormat" line="4" message="Rails 4.0.0 has a vulnerability in simple_format (CVE-2013-6416). Upgrade to Rails version 4.0.2" severity="warning" />
+        <error source="ContentTag" line="4" message="Rails 4.0.0 content_tag does not escape double quotes in attribute values (CVE-2016-6316). Upgrade to 4.2.7.1" severity="warning" />
+        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2013-6417). Upgrade to 4.0.2" severity="info" />
+        <error source="UnknowError" line="4" message="Rails 4.0.0 contains a SQL injection vulnerability (CVE-2014-3483). Upgrade to 4.0.7" severity="info" />
     </file>
 
     <file name="app/controllers/another_controller.rb">
-        <error source="RegexDoS" line="46" message="Parameter value used in regular expression" severity="warning" />
+        <error source="RegexDoS" line="46" message="Parameter value used in regex" severity="warning" />
         <error source="Evaluation" line="8" message="User input in eval" severity="warning" />
         <error source="SQL" line="59" message="Possible SQL injection" severity="warning" />
         <error source="Execute" line="19" message="Possible command injection" severity="warning" />
@@ -54,20 +52,20 @@
     <file name="app/controllers/users_controller.rb">
         <error source="FileAccess" line="90" message="Parameter value used in file name" severity="warning" />
         <error source="FileAccess" line="92" message="Parameter value used in file name" severity="warning" />
-        <error source="SkipBeforeFilter" line="13" message="List specific actions (`:only => [..]`) when skipping CSRF check" severity="warning" />
+        <error source="SkipBeforeFilter" line="13" message="Use whitelist (:only => [..]) when skipping CSRF check" severity="warning" />
         <error source="Evaluation" line="99" message="User input in eval" severity="warning" />
-        <error source="Render" line="16" message="Passing query parameters to `render` is vulnerable in Rails 4.0.0 (CVE-2016-0752)" severity="warning" />
-        <error source="UnscopedFind" line="72" message="Unscoped call to `Email#find_by_id!`" severity="warning" />
+        <error source="Render" line="16" message="Passing query parameters to render() is vulnerable in Rails 4.0.0 (CVE-2016-0752)" severity="warning" />
+        <error source="UnscopedFind" line="72" message="Unscoped call to Email#find_by_id!" severity="warning" />
         <error source="SQL" line="49" message="Possible SQL injection" severity="warning" />
         <error source="SQL" line="50" message="Possible SQL injection" severity="warning" />
-        <error source="CreateWith" line="66" message="`create_with` is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
+        <error source="CreateWith" line="66" message="create_with is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
         <error source="FileAccess" line="94" message="Parameter value used in file name" severity="warning" />
-        <error source="CreateWith" line="68" message="`create_with` is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
-        <error source="Execute" line="92" message="Possible command injection in `open`" severity="warning" />
-        <error source="CreateWith" line="60" message="`create_with` is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
-        <error source="CreateWith" line="62" message="`create_with` is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
-        <error source="Render" line="21" message="Passing query parameters to `render` is vulnerable in Rails 4.0.0 (CVE-2016-0752)" severity="warning" />
-        <error source="Execute" line="88" message="Possible command injection in `open`" severity="warning" />
+        <error source="CreateWith" line="68" message="create_with is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
+        <error source="Execute" line="92" message="Possible command injection in open()" severity="warning" />
+        <error source="CreateWith" line="60" message="create_with is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
+        <error source="CreateWith" line="62" message="create_with is vulnerable to strong params bypass. Upgrade to Rails 4.0.9 or patch" severity="warning" />
+        <error source="Render" line="21" message="Passing query parameters to render() is vulnerable in Rails 4.0.0 (CVE-2016-0752)" severity="warning" />
+        <error source="Execute" line="88" message="Possible command injection in open()" severity="warning" />
         <error source="FileAccess" line="88" message="Parameter value used in file name" severity="warning" />
     </file>
     <file name="app/views/another/various_xss.html.erb">
@@ -75,7 +73,7 @@
     </file>
     <file name="app/controllers/application_controller.rb">
         <error source="SSLVerify" line="26" message="SSL certificate verification was bypassed" severity="warning" />
-        <error source="DetailedExceptions" line="7" message="Detailed exceptions may be enabled in `show_detailed_exceptions?`" severity="warning" />
+        <error source="DetailedExceptions" line="7" message="Detailed exceptions may be enabled in 'show_detailed_exceptions?'" severity="warning" />
     </file>
     <file name="config/initializers/secret_token.rb">
         <error source="SessionSettings" line="14" message="Session secret should not be included in version control" severity="warning" />
@@ -90,17 +88,17 @@
     </file>
 
     <file name="app/models/user.rb">
-        <error source="SymbolDoS" line="13" message="Symbol conversion from unsafe string in model attribute" severity="warning" />
+        <error source="SymbolDoS" line="13" message="Symbol conversion from unsafe string (model attribute)" severity="warning" />
         <error source="SQL" line="6" message="Possible SQL injection" severity="warning" />
     </file>
     <file name="app/views/another/html_safe_is_not.html.erb">
         <error source="CrossSiteScripting" line="1" message="Unescaped parameter value" severity="warning" />
     </file>
     <file name="app/models/email.rb">
-        <error source="ValidationRegex" line="10" message="Insufficient validation for `email` using `/^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/`. Use `\A` and `\z` as anchors" severity="warning" />
+        <error source="ValidationRegex" line="10" message="Insufficient validation for 'email' using /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/. Use \A and \z as anchors" severity="warning" />
     </file>
     <file name="config/routes.rb">
-        <error source="DefaultRoutes" line="1" message="Rails 4.0.0 with globbing routes is vulnerable to directory traversal and remote code execution. Patch or upgrade to Rails 4.0.5" severity="warning" />
+        <error source="DefaultRoutes" line="1" message="Rails 4.0.0 with globbing routes is vulnerable to directory traversal and remote code execution. Patch or upgrade to 4.0.5" severity="warning" />
     </file>
     <file name="app/views/users/haml_test.html.haml">
         <error source="CrossSiteScripting" line="5" message="Unescaped parameter value" severity="warning" />

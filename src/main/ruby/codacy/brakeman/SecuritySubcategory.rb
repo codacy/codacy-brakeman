@@ -16,9 +16,7 @@ module SecuritySubcategory
             "JSONEncoding",
             "SelectTag",
             "SimpleFormat",
-            "RenderInline",
-            "JSONEntityEscape",
-            "ReverseTabnabbing"
+            "RenderInline"
         ],
         "InputValidation" => [
             "Deserialize",
@@ -37,22 +35,18 @@ module SecuritySubcategory
             "CreateWith",
             "SafeBufferManipulation",
             "Execute",
-            "YAMLParsing",
-            "PageCachingCVE",
-            "TemplateInjection"
+            "YAMLParsing"
         ],
         "FileAccess" => [
             "FileDisclosure",
             "Render",
-            "FileAccess",
-            "SprocketsPathTraversal"
+            "FileAccess"
         ],
         "HTTP" => [
             "ResponseSplitting"
         ],
         "Cookies" => [
-            "SessionSettings",
-            "CookieSerialization"
+            "SessionSettings"
         ],
         "MassAssignment" => [
             "MassAssignment",
@@ -62,8 +56,7 @@ module SecuritySubcategory
         ],
         "CSRF" => [
             "SkipBeforeFilter",
-            "ForgerySetting",
-            "CSRFTokenForgeryCVE"
+            "ForgerySetting"
         ],
         "DoS" => [
             "DigestDoS",
@@ -89,23 +82,18 @@ module SecuritySubcategory
             "EscapeFunction"
         ],
         "SSL" => [
-            "SSLVerify",
-            "ForceSSL"
+            "SSLVerify"
         ],
         "Cryptography" => [
             "WeakHash"
         ],
         "UnexpectedBehaviour" => [
-            "SendFile",
-            "VerbConfusion"
+            "SendFile"
         ],
         "Other" => [
             "DetailedExceptions",
             "UnscopedFind",
             "ContentTag"
-        ],
-        "CommandInjection" => [
-            "UnsafeReflectionMethods"
         ]
     }
 end

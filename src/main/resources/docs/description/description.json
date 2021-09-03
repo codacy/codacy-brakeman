@@ -12,21 +12,9 @@
     "timeToFix": 20
   },
   {
-    "patternId": "CSRFTokenForgeryCVE",
-    "title": "Checks for versions with CSRF token forgery vulnerability (CVE-2020-8166)",
-    "description": "Checks for versions with CSRF token forgery vulnerability (CVE-2020-8166)",
-    "timeToFix": 20
-  },
-  {
     "patternId": "ContentTag",
     "title": "Checks for XSS in calls to content_tag",
     "description": "Checks for XSS in calls to content_tag",
-    "timeToFix": 20
-  },
-  {
-    "patternId": "CookieSerialization",
-    "title": "Check for use of Marshal for cookie serialization",
-    "description": "Check for use of Marshal for cookie serialization",
     "timeToFix": 20
   },
   {
@@ -114,12 +102,6 @@
     "timeToFix": 20
   },
   {
-    "patternId": "ForceSSL",
-    "title": "Check that force_ssl setting is enabled in production",
-    "description": "Check that force_ssl setting is enabled in production",
-    "timeToFix": 20
-  },
-  {
     "patternId": "ForgerySetting",
     "title": "Verifies that protect_from_forgery is enabled in direct subclasses of ActionController::Base",
     "description": "Verifies that protect_from_forgery is enabled in direct subclasses of ActionController::Base",
@@ -147,12 +129,6 @@
     "patternId": "JSONEncoding",
     "title": "Checks for missing JSON encoding (CVE-2015-3226)",
     "description": "Checks for missing JSON encoding (CVE-2015-3226)",
-    "timeToFix": 20
-  },
-  {
-    "patternId": "JSONEntityEscape",
-    "title": "Check if HTML escaping is disabled for JSON output",
-    "description": "Check if HTML escaping is disabled for JSON output",
     "timeToFix": 20
   },
   {
@@ -193,8 +169,8 @@
   },
   {
     "patternId": "ModelAttrAccessible",
-    "title": "Reports models which have dangerous attributes defined via attr_accessible",
-    "description": "Reports models which have dangerous attributes defined via attr_accessible",
+    "title": "Reports models which have dangerous attributes defined under the attr_accessible whitelist.",
+    "description": "Reports models which have dangerous attributes defined under the attr_accessible whitelist.",
     "timeToFix": 20
   },
   {
@@ -228,15 +204,9 @@
     "timeToFix": 20
   },
   {
-    "patternId": "PageCachingCVE",
-    "title": "Check for page caching vulnerability (CVE-2020-8159)",
-    "description": "Check for page caching vulnerability (CVE-2020-8159)",
-    "timeToFix": 20
-  },
-  {
     "patternId": "PermitAttributes",
-    "title": "Warn on potentially dangerous attributes allowed via permit",
-    "description": "Warn on potentially dangerous attributes allowed via permit",
+    "title": "Warn on potentially dangerous attributes whitelisted via permit",
+    "description": "Warn on potentially dangerous attributes whitelisted via permit",
     "timeToFix": 20
   },
   {
@@ -279,12 +249,6 @@
     "patternId": "ResponseSplitting",
     "title": "Report response splitting in Rails 2.3.0 - 2.3.13",
     "description": "Report response splitting in Rails 2.3.0 - 2.3.13",
-    "timeToFix": 20
-  },
-  {
-    "patternId": "ReverseTabnabbing",
-    "title": "Checks for reverse tabnabbing cases on 'link_to' calls",
-    "description": "Checks for reverse tabnabbing cases on 'link_to' calls",
     "timeToFix": 20
   },
   {
@@ -384,12 +348,6 @@
     "timeToFix": 20
   },
   {
-    "patternId": "SprocketsPathTraversal",
-    "title": "Checks for CVE-2018-3760",
-    "description": "Checks for CVE-2018-3760",
-    "timeToFix": 20
-  },
-  {
     "patternId": "StripTags",
     "title": "Report strip_tags vulnerabilities",
     "description": "Report strip_tags vulnerabilities",
@@ -408,12 +366,6 @@
     "timeToFix": 20
   },
   {
-    "patternId": "TemplateInjection",
-    "title": "Searches for evaluation of user input through template injection",
-    "description": "Searches for evaluation of user input through template injection",
-    "timeToFix": 20
-  },
-  {
     "patternId": "TranslateBug",
     "title": "Report XSS vulnerability in translate helper",
     "description": "Report XSS vulnerability in translate helper",
@@ -426,12 +378,6 @@
     "timeToFix": 20
   },
   {
-    "patternId": "UnsafeReflectionMethods",
-    "title": "Checks for unsafe reflection to access methods",
-    "description": "Checks for unsafe reflection to access methods",
-    "timeToFix": 20
-  },
-  {
     "patternId": "UnscopedFind",
     "title": "Check for unscoped ActiveRecord queries",
     "description": "Check for unscoped ActiveRecord queries",
@@ -441,12 +387,6 @@
     "patternId": "ValidationRegex",
     "title": "Report uses of validates_format_of with improper anchors",
     "description": "Report uses of validates_format_of with improper anchors",
-    "timeToFix": 20
-  },
-  {
-    "patternId": "VerbConfusion",
-    "title": "Check for uses of `request.get?` that might have unintentional behavior",
-    "description": "Check for uses of `request.get?` that might have unintentional behavior",
     "timeToFix": 20
   },
   {

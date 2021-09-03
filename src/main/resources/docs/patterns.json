@@ -1,6 +1,6 @@
 {
   "name": "brakeman",
-  "version": "5.1.1",
+  "version": "4.3.1",
   "patterns": [
     {
       "patternId": "BasicAuth",
@@ -17,25 +17,11 @@
       "enabled": false
     },
     {
-      "patternId": "CSRFTokenForgeryCVE",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "CSRF",
-      "enabled": false
-    },
-    {
       "patternId": "ContentTag",
       "level": "Warning",
       "category": "Security",
       "subcategory": "Other",
       "enabled": true
-    },
-    {
-      "patternId": "CookieSerialization",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "Cookies",
-      "enabled": false
     },
     {
       "patternId": "CreateWith",
@@ -134,13 +120,6 @@
       "enabled": true
     },
     {
-      "patternId": "ForceSSL",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "SSL",
-      "enabled": false
-    },
-    {
       "patternId": "ForgerySetting",
       "level": "Warning",
       "category": "Security",
@@ -174,13 +153,6 @@
       "category": "Security",
       "subcategory": "XSS",
       "enabled": true
-    },
-    {
-      "patternId": "JSONEntityEscape",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "XSS",
-      "enabled": false
     },
     {
       "patternId": "JSONParsing",
@@ -265,13 +237,6 @@
       "enabled": false
     },
     {
-      "patternId": "PageCachingCVE",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "InputValidation",
-      "enabled": false
-    },
-    {
       "patternId": "PermitAttributes",
       "level": "Warning",
       "category": "Security",
@@ -325,13 +290,6 @@
       "category": "Security",
       "subcategory": "HTTP",
       "enabled": true
-    },
-    {
-      "patternId": "ReverseTabnabbing",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "XSS",
-      "enabled": false
     },
     {
       "patternId": "RouteDoS",
@@ -445,13 +403,6 @@
       "enabled": true
     },
     {
-      "patternId": "SprocketsPathTraversal",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "FileAccess",
-      "enabled": false
-    },
-    {
       "patternId": "StripTags",
       "level": "Warning",
       "category": "Security",
@@ -473,13 +424,6 @@
       "enabled": true
     },
     {
-      "patternId": "TemplateInjection",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "InputValidation",
-      "enabled": false
-    },
-    {
       "patternId": "TranslateBug",
       "level": "Warning",
       "category": "Security",
@@ -494,13 +438,6 @@
       "enabled": true
     },
     {
-      "patternId": "UnsafeReflectionMethods",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "CommandInjection",
-      "enabled": false
-    },
-    {
       "patternId": "UnscopedFind",
       "level": "Warning",
       "category": "Security",
@@ -513,13 +450,6 @@
       "category": "Security",
       "subcategory": "InputValidation",
       "enabled": true
-    },
-    {
-      "patternId": "VerbConfusion",
-      "level": "Warning",
-      "category": "Security",
-      "subcategory": "UnexpectedBehaviour",
-      "enabled": false
     },
     {
       "patternId": "WeakHash",
