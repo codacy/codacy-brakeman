@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  codacy: codacy/base@2.6.3
+  codacy: codacy/base@6.1.1
   codacy_plugins_test: codacy/plugins-test@0.15.4
 
 workflows:
@@ -12,14 +12,11 @@ workflows:
       - codacy/sbt:
           name: publish_docker_local
           cmd: |
-            docker build -t codacy-brakeman-base .
-            sbt "set scalafmtUseIvy in ThisBuild := false;
-                 scalafmt::test;
+            sbt "scalafmt::test;
                  test:scalafmt::test;
                  sbt:scalafmt::test;
-                 test;
-                 set version in Docker := \"latest\";
-                 docker:publishLocal"
+                 stage"
+            docker build -t codacy-brakeman .
             docker save --output docker-image.tar $CIRCLE_PROJECT_REPONAME:latest
           persist_to_workspace: true
           requires:

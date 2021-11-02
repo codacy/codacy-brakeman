@@ -1,12 +1,16 @@
-FROM openjdk:8-jre-alpine
+FROM ruby:2.7.4-alpine3.14
 
-COPY Gemfile .
-COPY Gemfile.lock .
+WORKDIR /workdir
 
-RUN apk add --no-cache bash ca-certificates build-base ruby ruby-bundler ruby-dev \
-    && echo 'gem: --no-document' > /etc/gemrc \
-    && gem install bundler -v 2.1.4 \
-    && bundle install \
-    && gem cleanup \
-    && apk del build-base ruby-bundler ruby-dev \
-    && rm -rf /tmp/* /var/cache/apk/*
+COPY Gemfile* ./
+
+RUN apk add --no-cache bash ca-certificates openjdk11 ruby-dev build-base && \
+    bundle install && \
+    adduser --uid 2004 --disabled-password --gecos "" docker
+
+COPY docs /docs
+
+COPY /target/universal/stage/ /workdir/
+RUN chmod +x /workdir/bin/codacy-brakeman 
+USER docker
+ENTRYPOINT [ "bin/codacy-brakeman" ]
