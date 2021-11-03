@@ -1,11 +1,12 @@
-FROM ruby:2.7.4-alpine3.14
+FROM alpine:3.14.2
 
 WORKDIR /workdir
 
 COPY Gemfile* ./
 
-RUN apk add --no-cache bash ca-certificates openjdk11 ruby-dev build-base && \
-    bundle install && \
+RUN apk add --no-cache bash ca-certificates openjdk11 ruby ruby-etc ruby-dev build-base && \
+    gem install bundler && \
+    bundler install && \
     adduser --uid 2004 --disabled-password --gecos "" docker
 
 COPY docs /docs
