@@ -4,7 +4,8 @@ module SecuritySubcategory
             "BasicAuth",
             "BasicAuthTimingAttack",
             "FilterSkipping",
-            "SessionManipulation"
+            "SessionManipulation",
+            "Secrets"
         ],
         "XSS" => [
             "MailTo",
@@ -16,7 +17,8 @@ module SecuritySubcategory
             "JSONEncoding",
             "SelectTag",
             "SimpleFormat",
-            "RenderInline"
+            "RenderInline",
+            "NumberToCurrency"
         ],
         "InputValidation" => [
             "Deserialize",
@@ -35,12 +37,14 @@ module SecuritySubcategory
             "CreateWith",
             "SafeBufferManipulation",
             "Execute",
-            "YAMLParsing"
+            "YAMLParsing",
+            "DynamicFinders"
         ],
         "FileAccess" => [
             "FileDisclosure",
             "Render",
-            "FileAccess"
+            "FileAccess",
+            "PermitAttributes"
         ],
         "HTTP" => [
             "ResponseSplitting"
@@ -93,7 +97,8 @@ module SecuritySubcategory
         "Other" => [
             "DetailedExceptions",
             "UnscopedFind",
-            "ContentTag"
+            "ContentTag",
+            "NestedAttributesBypass"
         ]
     }
 end
