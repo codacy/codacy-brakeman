@@ -4,8 +4,11 @@ WORKDIR /workdir
 
 COPY Gemfile* ./
 
+# Lets Brakeman 4.3.1 run on Ruby 3+/4.
+COPY compat.rb /opt/brakeman-compat.rb
+ENV RUBYOPT="-r/opt/brakeman-compat.rb"
+
 RUN apk add --no-cache bash ca-certificates openjdk17-jre build-base && \
-    gem install bundler && \
     bundle install && \
     adduser -u 2004 -D docker
 
