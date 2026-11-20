@@ -63,3 +63,7 @@ build-iPhoneSimulator/
 
 src/main/ruby/codacy/brakeman/vendor
 .metals
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md

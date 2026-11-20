@@ -3,6 +3,7 @@
 
 # Allow files and directories
 !/Gemfile*
+!/compat.rb
 !/target/universal/stage/
 !/docs
 

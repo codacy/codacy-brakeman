@@ -12,13 +12,14 @@ import scala.util.{Failure, Success, Try}
 case class WarnResult(warningCode: Int, message: String, file: String, line: JsValue)
 
 object WarnResult {
+
   implicit val warnReads: Reads[WarnResult] = (
     (__ \ "warning_code")
       .read[Int]
       .and((__ \ "message").read[String])
       .and((__ \ "file").read[String])
       .and((__ \ "line").read[JsValue])
-    )(WarnResult.apply _)
+  )(WarnResult.apply _)
 }
 
 object Brakeman extends Tool {
@@ -34,7 +35,8 @@ object Brakeman extends Tool {
   def apply(source: Source.Directory,
             configuration: Option[List[Pattern.Definition]],
             files: Option[Set[Source.File]],
-            options: Map[Options.Key, Options.Value])(implicit specification: Tool.Specification): Try[List[Result]] = {
+            options: Map[Options.Key, Options.Value]
+  )(implicit specification: Tool.Specification): Try[List[Result]] = {
 
     def isEnabled(result: Result) = {
       result match {
@@ -42,10 +44,10 @@ object Brakeman extends Tool {
           configuration.forall(_.exists {
             _.patternId == res.patternId
           }) &&
-            files.forall(_.exists(_.toString.endsWith(res.file.path)))
+          files.forall(_.exists(_.toString.endsWith(res.filename.path)))
 
         case res: Result.FileError =>
-          files.forall(_.exists(_.toString.endsWith(res.file.path)))
+          files.forall(_.exists(_.toString.endsWith(res.filename.path)))
 
         case _ => true
       }
@@ -184,7 +186,7 @@ object Brakeman extends Tool {
 
   private def warningToResult(warn: JsValue): Option[Result] = {
 
-    //In our tests we have the pattern and the error type
+    // In our tests we have the pattern and the error type
     lazy val defaultLineWarning = 1
 
     warn.asOpt[WarnResult].map { res =>
@@ -244,7 +246,8 @@ object Brakeman extends Tool {
                                   conf: Option[List[Pattern.Definition]],
                                   files: Option[Set[Source.File]],
                                   skipLibs: Boolean,
-                                  noBranching: Boolean)(implicit spec: Tool.Specification): List[String] = {
+                                  noBranching: Boolean
+  )(implicit spec: Tool.Specification): List[String] = {
 
     val patternsToTest = conf.withDefaultParameters
       .map { patterns =>
